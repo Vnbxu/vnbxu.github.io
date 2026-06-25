@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haoran Xu - Publications</title>
+    <style>
+        /* ===== Reset & Base ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #2d3748;
+            background-color: #ffffff;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        a {
+            color: #2b6cb0;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== Navigation ===== */
+        nav {
+            background-color: #1a365d;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        nav .nav-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+        }
+
+        nav .nav-name {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: bold;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 0;
+        }
+
+        nav .nav-links a {
+            color: #cbd5e0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 15px;
+            padding: 14px 20px;
+            display: block;
+            transition: color 0.2s, background-color 0.2s;
+        }
+
+        nav .nav-links a:hover,
+        nav .nav-links a.active {
+            color: #ffffff;
+            background-color: rgba(255,255,255,0.1);
+            text-decoration: none;
+        }
+
+        /* ===== Main Content ===== */
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .page-title {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 26px;
+            font-weight: bold;
+            color: #1a365d;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: 15px;
+            color: #718096;
+            margin-bottom: 36px;
+        }
+
+        /* ===== Year Header ===== */
+        .year-header {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a365d;
+            margin-top: 36px;
+            margin-bottom: 20px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #2b6cb0;
+            display: inline-block;
+        }
+
+        .year-header:first-of-type {
+            margin-top: 0;
+        }
+
+        /* ===== Paper Entry ===== */
+        .paper {
+            margin-bottom: 28px;
+            padding: 16px 20px;
+            background: #fafbfc;
+            border-radius: 6px;
+            border: 1px solid #e8ecf1;
+            transition: box-shadow 0.2s;
+        }
+
+        .paper:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        /* Title line: venue tag + title */
+        .paper-title-line {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 6px;
+        }
+
+        .venue-tag {
+            display: inline-block;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #4a5568;
+            padding: 2px 8px;
+            border-radius: 3px;
+            white-space: nowrap;
+            letter-spacing: 0.3px;
+            flex-shrink: 0;
+        }
+
+        /* Venue tag color variants */
+        .venue-tag.journal {
+            background-color: #477aae;
+        }
+
+        .venue-tag.conf {
+            background-color: #6e5aac;
+        }
+
+
+        .paper-title {
+            font-size: 16px;
+            font-weight: bold;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.4;
+        }
+
+        .paper-title a {
+            color: #1a202c;
+        }
+
+        .paper-title a:hover {
+            color: #2b6cb0;
+        }
+
+        /* Authors */
+        .paper-authors {
+            font-size: 14px;
+            color: #4a5568;
+            margin-bottom: 4px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .paper-authors .self {
+            font-weight: bold;
+            color: #1a202c;
+        }
+
+        .paper-authors .equal::after {
+            content: "*";
+            color: #a0aec0;
+        }
+
+        /* Venue line */
+        .paper-venue-line {
+            font-size: 14px;
+            color: #718096;
+            font-style: italic;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .paper-venue-line .if-score {
+            font-style: normal;
+            color: #c53030;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        /* Paper highlight note */
+        .paper-note {
+            font-size: 14px;
+            font-family: 'Helvetica Neue', sans-serif;
+            color: #b7791f;
+            margin-bottom: 6px;
+            font-style: italic;
+        }
+
+        /* Badges (inline within venue line) */
+        .paper-badges {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-block;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 11px;
+            font-weight: bold;
+            font-style: normal;
+            padding: 2px 8px;
+            border-radius: 3px;
+            letter-spacing: 0.2px;
+            flex-shrink: 0;
+        }
+
+        .badge-ccfa {
+            background-color: #fed7d7;
+            color: #c53030;
+            border: 1px solid #feb2b2;
+        }
+
+        .badge-ccfb {
+            background-color: #fefcbf;
+            color: #975a16;
+            border: 1px solid #faf089;
+        }
+
+        .badge-ccfc {
+            background-color: #e2e8f0;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .badge-cas1 {
+            background-color: #e9d8fd;
+            color: #553c9a;
+            border: 1px solid #d6bcfa;
+        }
+
+        .badge-cas2 {
+            background-color: #bee3f8;
+            color: #2a4365;
+            border: 1px solid #90cdf4;
+        }
+
+        .badge-cast1 {
+            background-color: #e9d8fd;
+            color: #553c9a;
+            border: 1px solid #d6bcfa;
+        }
+
+        /* Action buttons row */
+        .paper-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .paper-actions a {
+            font-size: 12px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 500;
+            padding: 3px 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            color: #4a5568;
+            background: #ffffff;
+            transition: all 0.2s;
+            letter-spacing: 0.2px;
+        }
+
+        .paper-actions a:hover {
+            background-color: #2b6cb0;
+            color: #ffffff;
+            border-color: #2b6cb0;
+            text-decoration: none;
+        }
+
+        /* BibTeX block */
+        .bibtex {
+            display: none;
+            margin-top: 8px;
+            padding: 12px 16px;
+            background: #f1f3f5;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+            color: #4a5568;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 24px 24px 40px;
+            text-align: center;
+            font-size: 13px;
+            color: #a0aec0;
+            border-top: 1px solid #e2e8f0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 680px) {
+            .paper {
+                padding: 12px 14px;
+            }
+
+            .paper-title-line {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .paper-actions {
+                gap: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== Navigation Bar ===== -->
+<nav>
+    <div class="nav-inner">
+        <span class="nav-name">Haoran Xu (徐浩然)</span>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="publications.html" class="active">Publications</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== Main Content ===== -->
+<div class="container">
+
+    <h1 class="page-title">Publications</h1>
+    <p class="page-subtitle"><span style="font-style: normal; color: #a0aec0;">*</span> denotes co-primary authors.</p>
+    
+    <div class="paper">
+        <div class="paper-title-line">
+            <span class="venue-tag conf">SIGCOMM'26</span>
+            <div class="paper-title">
+                AIDA: Accelerating Root Cause Analysis for Multi-Vendor Device Failures with LLM-Powered Reasoning
+            </div>
+        </div>
+        <div class="paper-authors">
+            <span class="self">Haoran Xu</span>, Xuan Zeng, Xumiao Zhang, Xiaoxi Zhang, Yang Lv, Peng Zhang, Deke Guo, Ennan Zhai.
+        </div>
+        <div class="paper-venue-line">
+            ACM Special Interest Group on Data Communication (SIGCOMM), 2026
+            <div class="paper-badges">
+                <span class="badge badge-ccfa">CCF-A</span>
+            </div>
+        </div>
+        <div class="paper-note">🏵️ First-ever SIGCOMM main-track paper from Sun Yat-sen University.</div>
+        <!-- <div class="paper-actions">
+            <a href="javascript:void(0)" onclick="toggleBibtex(this)">Cite</a>
+            <a href="#">Paper</a>
+        </div>
+        <div class="bibtex"></div> -->
+    </div>
+
+
+    <div class="paper">
+        <div class="paper-title-line">
+            <span class="venue-tag journal">IEEE TMC'26</span>
+            <div class="paper-title">
+                Joint Bitrate and Resource Adaptation for Super-Resolution Video Streaming in Multi-Cluster Edge Networks: A New Online Learning Approach
+            </div>
+        </div>
+        <div class="paper-authors">
+            Xiaoxi Zhang, 
+            <span class="self">Haoran Xu</span>, 
+            Longhao Zou, Jingpu Duan, Chuan Wu, Yali Xue, Zuozhou Chen, Chaoqi Zhou, Xu Chen
+        </div>
+        <div class="paper-venue-line">
+            IEEE Transactions on Mobile Computing (TMC), 2026
+            <div class="paper-badges">
+                <span class="badge badge-ccfa">CCF-A</span>
+                <span class="badge badge-cas2">中科院一区(Top)</span>
+            </div>
+        </div>
+        <div class="paper-actions">
+            <a href="javascript:void(0)" onclick="toggleBibtex(this)">Cite</a>
+            <a href="https://ieeexplore.ieee.org/document/11328905/">Paper</a>
+        </div>
+        <div class="bibtex">@article{zhang2026joint,
+  title={Joint Bitrate and Resource Adaptation for Super-Resolution Video Streaming in Multi-Cluster Edge Networks: A New Online Learning Approach},
+  author={Zhang, Xiaoxi and Xu, Haoran and Zou, Longhao and Duan, Jingpu and Wu, Chuan and Xue, Yali and Chen, Zuozhou and Zhou, Chaoqi and Chen, Xu},
+  journal={IEEE Transactions on Mobile Computing},
+  year={2026},
+  publisher={IEEE}
+}</div>
+    </div>
+
+
+    <div class="paper">
+        <div class="paper-title-line">
+            <span class="venue-tag conf">NSDI'25</span>
+            <div class="paper-title">
+                Learning Production-Optimized Congestion Control Selection for Alibaba Cloud CDN
+            </div>
+        </div>
+        <div class="paper-authors">
+            <span class="equal">Xuan Zeng</span>, <span class="self equal">Haoran Xu</span>, <span class="equal">Chen Chen</span>, Xumiao Zhang, Xiaoxi Zhang, Xu Chen, Guihai Chen, Yubing Qiu, Yiping Zhang, Chong Hao,  Ennan Zhai.
+        </div>
+        <div class="paper-venue-line">
+             USENIX Symposium on Networked Systems Design and Implementation (NSDI), 2025
+            <div class="paper-badges">
+                <span class="badge badge-ccfa">CCF-A</span>
+            </div>
+        </div>
+        <div class="paper-actions">
+            <a href="javascript:void(0)" onclick="toggleBibtex(this)">Cite</a>
+            <a href="https://www.usenix.org/system/files/nsdi25-zeng.pdf">Paper</a>
+            <a href="https://www.usenix.org/system/files/nsdi25_slides-zeng.pdf">Slides</a>
+        </div>
+        <div class="bibtex">@inproceedings{zeng2025learning,
+  title={Learning $\{$Production-Optimized$\}$ Congestion Control Selection for Alibaba Cloud $\{$CDN$\}$},
+  author={Zeng, Xuan and Xu, Haoran and Chen, Chen and Zhang, Xumiao and Zhang, Xiaoxi and Chen, Xu and Chen, Guihai and Qiu, Yubing and Zhang, Yiping and Hao, Chong and others},
+  booktitle={22nd USENIX Symposium on Networked Systems Design and Implementation (NSDI 25)},
+  pages={827--845},
+  year={2025}
+}</div>
+    </div>
+
+
+    <div class="paper">
+        <div class="paper-title-line">
+            <span class="venue-tag conf">NAS'24</span>
+            <div class="paper-title">
+                MPVSched: Multipath Transmissions and Video Frame Scheduling for Content Delivery Networks
+            </div>
+        </div>
+        <div class="paper-authors">
+            <span class="self">Haoran Xu</span>, Xiaoxi Zhang, Jingpu Duan, Chuan Wu, Jinhang Zuo, Xuan Zeng, Chen Chen, Yubing Qiu, Xu Chen.
+        </div>
+        <div class="paper-venue-line">
+            IEEE International Conference on Networking, Architecture, and Storage (NAS), 2024
+            <div class="paper-badges">
+                <span class="badge badge-ccfc">CCF-C</span>
+            </div>
+        </div>
+        <div class="paper-actions">
+            <a href="javascript:void(0)" onclick="toggleBibtex(this)">Cite</a>
+            <a href="https://ieeexplore.ieee.org/document/10781355/">Paper</a>
+        </div>
+        <div class="bibtex">@inproceedings{xu2024mpvsched,
+  title={MPVSched: Multipath Transmissions and Video Frame Scheduling for Content Delivery Networks},
+  author={Xu, Haoran and Zhang, Xiaoxi and Duan, Jingpu and Wu, Chuan and Zuo, Jinhang and Zeng, Xuan and Chen, Chen and Qiu, Yubing and Chen, Xu},
+  booktitle={2024 International Conference on Networking, Architecture and Storage (NAS)},
+  pages={1--4},
+  year={2024},
+  organization={IEEE}
+}</div>
+    </div>
+
+
+    <div class="paper">
+        <div class="paper-title-line">
+            <span class="venue-tag conf">INFOCOM'24</span>
+            <div class="paper-title">
+                Rosevin: Employing Resource- and Rate-Adaptive Edge Super-Resolution for Video Streaming
+            </div>
+        </div>
+        <div class="paper-authors">
+            Xiaoxi Zhang, <span class="self">Haoran Xu</span>, Longhao Zou, Jingpu Duan, Chuan Wu, Yali Xue, Zuozhou Chen, Xu Chen
+        </div>
+        <div class="paper-venue-line">
+            IEEE International Conference on Computer Communications (INFOCOM), 2024
+            <div class="paper-badges">
+                <span class="badge badge-ccfa">CCF-A</span>
+            </div>
+        </div>
+        <div class="paper-actions">
+            <a href="javascript:void(0)" onclick="toggleBibtex(this)">Cite</a>
+            <a href="https://ieeexplore.ieee.org/document/10621104">Paper</a>
+        </div>
+        <div class="bibtex">@inproceedings{zhang2024rosevin,
+  title={Rosevin: Employing resource-and rate-adaptive edge super-resolution for video streaming},
+  author={Zhang, Xiaoxi and Xu, Haoran and Zou, Longhao and Duan, Jingpu and Wu, Chuan and Xue, Yali and Chen, Zuozhou and Chen, Xu},
+  booktitle={IEEE INFOCOM 2024-IEEE Conference on Computer Communications},
+  pages={491--500},
+  year={2024},
+  organization={IEEE}
+}</div>
+    </div>
+
+    <!--
+    ===== Template for adding more papers =====
+    <div class="paper">
+        <div class="paper-title-line">
+            <span class="venue-tag journal">VENUE'XX</span>
+            <div class="paper-title">
+                <a href="pub/filename.pdf">Paper Title Here</a>
+            </div>
+        </div>
+        <div class="paper-authors">
+            <span class="self">Haoran Xu</span>,
+            Coauthor A,
+            Coauthor B
+        </div>
+        <div class="paper-venue-line">
+            Full Venue Name, Year
+            <div class="paper-badges">
+                <span class="badge badge-ccfa">CCF-A</span>
+                <span class="badge badge-cas1">中科院一区(Top)</span>
+            </div>
+        </div>
+        <div class="paper-actions">
+            <a href="javascript:void(0)" onclick="toggleBibtex(this)">Cite</a>
+            <a href="pub/filename.pdf">Paper</a>
+            <a href="#">Slides</a>
+        </div>
+        <div class="bibtex">@inproceedings{key2026,
+  title     = {Paper Title Here},
+  author    = {Xu, Haoran and Author, A and Author, B},
+  booktitle = {Full Venue Name},
+  year      = {2026}
+}</div>
+    </div>
+
+    Badge class reference:
+      badge-ccfa   → CCF-A (red)
+      badge-ccfb   → CCF-B (yellow)
+      badge-ccfc   → CCF-C (gray)
+      badge-cas1   → 中科院一区(Top) (purple)
+      badge-cas2   → 中科院二区(Top) (blue)
+      badge-cast1  → 中国科协T1类 (purple)
+
+    Venue tag class reference:
+      journal   → blue (for journals)
+      conf      → purple (for conferences)
+
+    Co-primary authors:
+      Add class="equal" to author span to show * after name.
+      Combine with self: class="self equal"
+    -->
+
+</div>
+
+<!-- ===== Footer ===== -->
+<footer>
+    &copy; 2026 Haoran Xu &middot; Last updated: June 2026
+</footer>
+
+<script>
+function toggleBibtex(btn) {
+    var block = btn.closest('.paper').querySelector('.bibtex');
+    if (block.style.display === 'block') {
+        block.style.display = 'none';
+        btn.textContent = 'Cite';
+    } else {
+        block.style.display = 'block';
+        btn.textContent = 'Hide';
+    }
+}
+</script>
+
+</body>
+</html>

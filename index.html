@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Homepage</title>
+    <style>
+        /* ===== Reset & Base ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #2d3748;
+            background-color: #ffffff;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        a {
+            color: #2b6cb0;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== Navigation ===== */
+        nav {
+            background-color: #1a365d;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        nav .nav-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+        }
+
+        nav .nav-name {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: bold;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 0;
+        }
+
+        nav .nav-links a {
+            color: #cbd5e0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 15px;
+            padding: 14px 20px;
+            display: block;
+            transition: color 0.2s, background-color 0.2s;
+        }
+
+        nav .nav-links a:hover,
+        nav .nav-links a.active {
+            color: #ffffff;
+            background-color: rgba(255,255,255,0.1);
+            text-decoration: none;
+        }
+
+        /* ===== Main Content ===== */
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        /* ===== Profile Section (Left-Right) ===== */
+        .profile-section {
+            display: flex;
+            gap: 48px;
+            align-items: flex-start;
+            padding-bottom: 36px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        /* Left column: photo + basic info */
+        .profile-left {
+            flex: 0 0 220px;
+            text-align: center;
+        }
+
+        .profile-left .avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #e2e8f0;
+            margin-bottom: 16px;
+            background-color: #edf2f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 48px;
+            color: #a0aec0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .profile-left .name {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a202c;
+            margin-bottom: 4px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .profile-left .name-cn {
+            font-size: 16px;
+            color: #718096;
+            margin-bottom: 8px;
+        }
+
+        .profile-left .affiliation {
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+
+        .profile-left .contact-links {
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            font-size: 14px;
+        }
+
+        .profile-left .contact-links a {
+            color: #2b6cb0;
+        }
+
+        /* Right column: bio, interest, education */
+        .profile-right {
+            flex: 1;
+        }
+
+        .section-title {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            color: #1a365d;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #2b6cb0;
+            display: inline-block;
+        }
+
+        .profile-right .block {
+            margin-bottom: 28px;
+        }
+
+        .profile-right p {
+            color: #4a5568;
+            font-size: 15px;
+            text-align: justify;
+        }
+
+        .interest-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .interest-list li {
+            padding: 4px 0;
+            font-size: 15px;
+            color: #4a5568;
+            position: relative;
+            padding-left: 18px;
+        }
+
+        .interest-list li::before {
+            content: "\25B8";
+            position: absolute;
+            left: 0;
+            color: #2b6cb0;
+        }
+
+        /* Education entries */
+        .edu-entry {
+            margin-bottom: 14px;
+            display: flex;
+            gap: 16px;
+            align-items: baseline;
+        }
+
+        .edu-entry .edu-time {
+            flex: 0 0 140px;
+            font-size: 14px;
+            color: #718096;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .edu-entry .edu-detail {
+            flex: 1;
+        }
+
+        .edu-entry .edu-school {
+            font-size: 15px;
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        .edu-entry .edu-degree {
+            font-size: 14px;
+            color: #718096;
+        }
+
+        /* ===== Experience Section (Full Width) ===== */
+        .experience-section {
+            margin-top: 36px;
+        }
+
+        .exp-entry {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 16px;
+            align-items: baseline;
+        }
+
+        .exp-entry .exp-time {
+            flex: 0 0 140px;
+            font-size: 14px;
+            color: #718096;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .exp-entry .exp-detail {
+            flex: 1;
+        }
+
+        .exp-entry .exp-role {
+            font-size: 15px;
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        .exp-entry .exp-org {
+            font-size: 14px;
+            color: #4a5568;
+        }
+
+        .exp-entry .exp-desc {
+            font-size: 14px;
+            color: #718096;
+            margin-top: 4px;
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 24px 24px 40px;
+            text-align: center;
+            font-size: 13px;
+            color: #a0aec0;
+            border-top: 1px solid #e2e8f0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 680px) {
+            .profile-section {
+                flex-direction: column;
+                align-items: center;
+                gap: 24px;
+            }
+
+            .profile-left {
+                flex: none;
+            }
+
+            .edu-entry,
+            .exp-entry {
+                flex-direction: column;
+                gap: 2px;
+            }
+
+            .edu-entry .edu-time,
+            .exp-entry .exp-time {
+                flex: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== Navigation Bar ===== -->
+<nav>
+    <div class="nav-inner">
+        <span class="nav-name">Haoran Xu (徐浩然)</span>
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="publications.html">Publications</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== Main Content ===== -->
+<div class="container">
+
+    <!-- Profile: Left-Right Layout -->
+    <div class="profile-section">
+
+        <!-- Left: Photo, Name, Affiliation -->
+        <div class="profile-left">
+            <img class="avatar" src="index_files/haoran.jpg" alt="Haoran Xu"> 
+
+            <div class="name">Haoran Xu</div>
+            <div class="name-cn">徐浩然</div>
+            <div class="affiliation">
+                Ph.D. Student<br>
+                Sun Yat-sen University
+            </div>
+            <div class="contact-links">
+                <a href="mailto:yourname@example.edu">xuhr6 [AT] mail2.sysu.edu</a>
+                <a href="https://scholar.google.com/citations?user=OB9Gi8oAAAAJ&hl=zh-CN&oi=ao" target="_blank">Google Scholar</a>
+                <!-- <a href="https://github.com/" target="_blank">GitHub</a> -->
+            </div>
+        </div>
+
+        <!-- Right: Biography, Research Interests, Education -->
+        <div class="profile-right">
+
+            <!-- Biography -->
+            <div class="block">
+                <div class="section-title">Biography</div>
+                <p>
+                    I am a first-year Ph.D. student in the School of Computer Science at Sun Yat-sen University, working under the guidance of Prof. Deke Guo. My research broadly focuses on AI for Networking, with particular emphasis on integrating AI into network infrastructure and management. 
+                </p>
+                <p>
+                    Prior to my Ph.D. program, I received my B.S. degree from Sun Yat-sen University and began my graduate research under the mentorship of Assoc. Prof.  Xiaoxi Zhang. I have also worked as a Research Intern at Alibaba Cloud with Dr. Ennan Zhai and Dr. Xuan Zeng, exploring AI-driven network operations.
+                </p>
+            </div>
+
+            <!-- Research Interests -->
+            <!-- <div class="block">
+                <div class="section-title">Research Interests</div>
+                <ul class="interest-list">
+                    <li>AI for Networking</li>
+                    <li>Large Language Models</li>
+                    <li>Machine Learning</li>
+                    <li>Information Retrieval</li>
+                </ul>
+            </div> -->
+
+            <!-- Education -->
+            <div class="block">
+                <div class="section-title">Education</div>
+
+                <div class="edu-entry">
+                    <span class="edu-time">2025.9 - Present</span>
+                    <div class="edu-detail">
+                        <div class="edu-school">Sun Yat-sen University</div>
+                        <div class="edu-degree">Ph.D. in Computer Science, advised by Prof. Deke Guo</div>
+                    </div>
+                </div>
+
+                <div class="edu-entry">
+                    <span class="edu-time">2023.9 - 2025.8</span>
+                    <div class="edu-detail">
+                        <div class="edu-school">Sun Yat-sen University</div>
+                        <div class="edu-degree">M.S. in Computer Science, advised by Assoc. Prof. Xiaoxi Zhang</div>
+                        <div class="edu-degree" style="font-size: 12px; color: #a0aec0; margin-top: 2px;">Integrated Master's-Ph.D. Program (硕博连读)</div>
+                    </div>
+                </div>
+
+                <div class="edu-entry">
+                    <span class="edu-time">2018.9 - 2023.6</span>
+                    <div class="edu-detail">
+                        <div class="edu-school">Sun Yat-sen University</div>
+                        <div class="edu-degree">B.S. in Information and Computational Science</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Experience Section (Full Width) -->
+    <div class="experience-section">
+        <div class="section-title">Experience</div>
+
+        <div class="exp-entry">
+            <span class="exp-time">2024.5 - 2026.6</span>
+            <div class="exp-detail">
+                <div class="exp-role">Research Intern</div>
+                <div class="exp-org">Network Research Lab, Alibaba Cloud</div>
+                <div class="exp-desc">Worked on developing an <b>LLM-driven network operations system that automates root cause analysis and fault diagnosis for large-scale cloud infrastructure</b>, supervised by Dr. Ennan Zhai and Dr. Xuan Zeng.</div>                  
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ===== Footer ===== -->
+<footer>
+    &copy; 2026 Haoran Xu &middot; Last updated: June 2026
+</footer>
+
+</body>
+</html>
