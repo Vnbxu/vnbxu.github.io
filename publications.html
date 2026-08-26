@@ -5,24 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Haoran Xu - Publications</title>
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
     <style>
-        /* ===== Reset & Base ===== */
+        :root {
+            --content-width: 1180px;
+            --navy: #1a365d;
+            --blue: #2b6cb0;
+            --text: #2d3748;
+            --muted: #757575;
+            --border: #e2e8f0;
+            --soft: #f8fafc;
+            --gold: #b7791f;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            color: #2d3748;
-            background-color: #ffffff;
-            line-height: 1.7;
+            color: var(--text);
+            background: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
             font-size: 16px;
+            line-height: 1.65;
         }
 
         a {
-            color: #2b6cb0;
+            color: var(--blue);
             text-decoration: none;
         }
 
@@ -30,611 +45,855 @@
             text-decoration: underline;
         }
 
-        /* ===== Navigation ===== */
+        button {
+            font: inherit;
+        }
+
+        :focus-visible {
+            outline: 3px solid rgba(43, 108, 176, 0.35);
+            outline-offset: 2px;
+        }
+
+        /* Navigation */
         nav {
-            background-color: #1a365d;
-            padding: 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.96);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+            box-shadow: 0 4px 14px rgba(26, 54, 93, 0.1);
+            backdrop-filter: blur(10px);
         }
 
-        nav .nav-inner {
-            max-width: 960px;
+        .nav-inner {
+            width: min(var(--content-width), 100%);
+            min-height: 52px;
             margin: 0 auto;
+            padding: 0 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 24px;
+            gap: 18px;
         }
 
-        nav .nav-name {
-            color: #ffffff;
-            font-size: 18px;
-            font-weight: bold;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            letter-spacing: 0.5px;
+        .nav-name {
+            color: #1a202c;
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            white-space: nowrap;
         }
 
-        nav .nav-links {
+        .nav-name-short {
+            display: none;
+        }
+
+        .nav-links {
             display: flex;
-            gap: 0;
+            align-items: stretch;
+            flex-shrink: 0;
         }
 
-        nav .nav-links a {
-            color: #cbd5e0;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            font-size: 15px;
-            padding: 14px 20px;
+        .nav-links a {
             display: block;
+            padding: 13px 18px;
+            color: #4a5568;
+            font-size: 14px;
+            white-space: nowrap;
             transition: color 0.2s, background-color 0.2s;
         }
 
-        nav .nav-links a:hover,
-        nav .nav-links a.active {
-            color: #ffffff;
-            background-color: rgba(255, 255, 255, 0.1);
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--blue);
+            background: #edf4ff;
             text-decoration: none;
         }
 
-        /* ===== Main Content ===== */
+        /* Page header */
         .container {
-            max-width: 960px;
+            width: min(var(--content-width), 100%);
             margin: 0 auto;
-            padding: 40px 24px;
+            padding: 38px 24px 24px;
         }
 
         .page-title {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            font-size: 26px;
-            font-weight: bold;
-            color: #1a365d;
+            color: var(--navy);
+            font-size: 34px;
+            font-weight: 700;
+            letter-spacing: -0.4px;
+            line-height: 1.2;
             margin-bottom: 8px;
         }
 
         .page-subtitle {
+            color: var(--muted);
             font-size: 15px;
-            color: #718096;
-            margin-bottom: 36px;
+            margin-bottom: 22px;
         }
 
-        /* ===== Year Header ===== */
-        .year-header {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            font-size: 18px;
-            font-weight: bold;
-            color: #1a365d;
-            margin-top: 36px;
-            margin-bottom: 20px;
-            padding-bottom: 6px;
-            border-bottom: 2px solid #2b6cb0;
-            display: inline-block;
+        /* Filters */
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
         }
 
-        .year-header:first-of-type {
+        .filter-button {
+            min-height: 32px;
+            padding: 4px 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 999px;
+            color: #4a5568;
+            background: #ffffff;
+            cursor: pointer;
+            font-size: 13px;
+            transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+        }
+
+        .filter-button:hover,
+        .filter-button.active {
+            border-color: var(--blue);
+            color: #ffffff;
+            background: var(--blue);
+        }
+
+        .legend {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .legend {
+            margin-top: 28px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Publication list */
+        .year-group {
+            margin-top: 30px;
+        }
+
+        .year-group:first-child {
             margin-top: 0;
         }
 
-        /* ===== Paper Entry ===== */
+        .year-group[hidden],
+        .paper[hidden],
+        .no-results[hidden] {
+            display: none;
+        }
+
+        .year-header {
+            display: inline-block;
+            margin-bottom: 14px;
+            padding-bottom: 4px;
+            border-bottom: 2px solid var(--blue);
+            color: var(--navy);
+            font-size: 21px;
+            font-weight: 700;
+            line-height: 1.25;
+        }
+
         .paper {
-            margin-bottom: 28px;
-            padding: 16px 20px;
-            background: #fafbfc;
-            border-radius: 6px;
-            border: 1px solid #e8ecf1;
-            transition: box-shadow 0.2s;
+            margin-bottom: 15px;
+            padding: 15px 17px;
+            border: 1px solid var(--border);
+            border-left: 3px solid transparent;
+            border-radius: 5px;
+            background: #ffffff;
+            transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
         }
 
         .paper:hover {
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border-left-color: var(--blue);
+            background: var(--soft);
+            box-shadow: 0 2px 8px rgba(26, 54, 93, 0.06);
         }
 
-        /* Title line: venue tag + title */
         .paper-title-line {
             display: flex;
             align-items: baseline;
-            gap: 10px;
             flex-wrap: wrap;
-            margin-bottom: 6px;
+            gap: 8px;
+            margin-bottom: 5px;
         }
 
         .venue-tag {
             display: inline-block;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            font-size: 12px;
-            font-weight: bold;
-            color: #ffffff;
-            background-color: #4a5568;
-            padding: 2px 8px;
-            border-radius: 3px;
-            white-space: nowrap;
-            letter-spacing: 0.3px;
             flex-shrink: 0;
-        }
-
-        /* Venue tag color variants */
-        .venue-tag.journal {
-            background-color: #477aae;
+            padding: 3px 8px;
+            border-radius: 4px;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            line-height: 1.35;
+            white-space: nowrap;
         }
 
         .venue-tag.conf {
-            background-color: #6e5aac;
+            background: #6e5aac;
         }
 
+        .venue-tag.journal {
+            background: #477aae;
+        }
 
         .paper-title {
+            min-width: 0;
+            color: #1a202c;
             font-size: 16px;
-            font-weight: bold;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 600;
             line-height: 1.4;
         }
 
         .paper-title a {
-            color: #1a202c;
+            color: inherit;
         }
 
         .paper-title a:hover {
-            color: #2b6cb0;
+            color: var(--blue);
+            text-decoration: none;
         }
 
-        /* Authors */
         .paper-authors {
+            margin-bottom: 3px;
+            color: #333333;
             font-size: 14px;
-            color: #4a5568;
-            margin-bottom: 4px;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.55;
         }
 
         .paper-authors .self {
-            font-weight: bold;
             color: #1a202c;
+            font-weight: 700;
         }
 
         .paper-authors .equal::after {
             content: "*";
-            color: #a0aec0;
+            color: var(--muted);
         }
 
-        /* Venue line */
         .paper-venue-line {
-            font-size: 14px;
-            color: #718096;
-            font-style: italic;
-            margin-bottom: 8px;
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .paper-venue-line .if-score {
-            font-style: normal;
-            color: #c53030;
-            font-weight: bold;
-            font-size: 13px;
-        }
-
-        /* Paper highlight note */
-        .paper-note {
+            gap: 7px;
+            margin-bottom: 9px;
             font-size: 14px;
-            font-family: 'Helvetica Neue', sans-serif;
-            color: #b7791f;
-            margin-bottom: 6px;
-            font-style: italic;
+            line-height: 1.5;
         }
 
-        /* Badges (inline within venue line) */
         .paper-badges {
-            display: flex;
-            gap: 6px;
+            display: inline-flex;
             flex-wrap: wrap;
+            gap: 5px;
         }
 
         .badge {
             display: inline-block;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            padding: 2px 7px;
+            border: 1px solid transparent;
+            border-radius: 4px;
             font-size: 11px;
-            font-weight: bold;
             font-style: normal;
-            padding: 2px 8px;
-            border-radius: 3px;
-            letter-spacing: 0.2px;
-            flex-shrink: 0;
+            font-weight: 700;
+            letter-spacing: 0.1px;
+            line-height: 1.35;
+            white-space: nowrap;
         }
 
         .badge-ccfa {
-            background-color: #fee2e2;
-            color: #b91c1c;
-            border: 1px solid #fecaca;
+            border-color: #eab7c1;
+            color: #a8324c;
+            background: #fce8ec;
         }
 
         .badge-ccfb {
-            background-color: #dbeafe;
-            color: #1d4ed8;
-            border: 1px solid #bfdbfe;
+            border-color: #b7cae4;
+            color: #315f91;
+            background: #e8f0fa;
         }
 
         .badge-ccfc {
-            background-color: #fef3c7;
-            color: #92400e;
-            border: 1px solid #fde68a;
+            border-color: #c9d0d7;
+            color: #52606d;
+            background: #eef1f4;
         }
 
-        .badge-cas1 {
-            background-color: #e9d8fd;
-            color: #553c9a;
-            border: 1px solid #d6bcfa;
+        .badge-cas1,
+        .badge-cast1 {
+            border-color: #d1bde5;
+            color: #70479a;
+            background: #f0eaf7;
         }
 
         .badge-cas2 {
-            background-color: #bee3f8;
+            border-color: #90cdf4;
             color: #2a4365;
-            border: 1px solid #90cdf4;
+            background: #bee3f8;
         }
 
-        .badge-cast1 {
-            background-color: #e9d8fd;
-            color: #553c9a;
-            border: 1px solid #d6bcfa;
-        }
-
-        /* Action buttons row */
         .paper-actions {
             display: flex;
-            gap: 8px;
             flex-wrap: wrap;
+            align-items: center;
+            gap: 7px;
         }
 
-        .paper-actions a {
-            font-size: 12px;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            font-weight: 500;
-            padding: 3px 12px;
+        .action-button {
+            display: inline-flex;
+            min-height: 30px;
+            align-items: center;
+            justify-content: center;
+            padding: 3px 10px;
             border: 1px solid #cbd5e0;
             border-radius: 4px;
             color: #4a5568;
             background: #ffffff;
-            transition: all 0.2s;
-            letter-spacing: 0.2px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.1px;
+            line-height: 1.3;
+            text-decoration: none;
+            transition: color 0.2s, background-color 0.2s, border-color 0.2s;
         }
 
-        .paper-actions a:hover {
-            background-color: #2b6cb0;
+        .action-button:hover {
+            border-color: var(--blue);
             color: #ffffff;
-            border-color: #2b6cb0;
+            background: var(--blue);
             text-decoration: none;
         }
 
-        /* BibTeX block */
-        .bibtex {
-            display: none;
-            margin-top: 8px;
-            padding: 12px 16px;
-            background: #f1f3f5;
-            border: 1px solid #e2e8f0;
-            border-radius: 4px;
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 12px;
-            line-height: 1.6;
-            color: #4a5568;
-            white-space: pre-wrap;
-            word-break: break-all;
-        }
-
-        /* ===== Footer ===== */
-        footer {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 24px 24px 40px;
-            text-align: center;
+        .highlight {
+            color: var(--gold);
             font-size: 13px;
-            color: #a0aec0;
-            border-top: 1px solid #e2e8f0;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-style: italic;
+            font-weight: 600;
         }
 
-        /* ===== Responsive ===== */
+        .bibtex {
+            position: relative;
+            display: block;
+            margin-top: 9px;
+            padding: 11px 45px 11px 13px;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: #4a5568;
+            background: #f1f3f5;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+            font-size: 12px;
+            line-height: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+            -webkit-user-select: none;
+            user-select: none;
+            padding-top: 7px;
+            padding-bottom: 7px;
+        }
+
+        .bibtex[hidden] {
+            display: none;
+        }
+
+        .bibtex-code {
+            display: block;
+            line-height: 1.4;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            min-height: 26px;
+            padding: 2px 7px;
+            border: 1px solid #cbd5e0;
+            border-radius: 3px;
+            color: #4a5568;
+            background: #ffffff;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .copy-button:hover {
+            border-color: var(--blue);
+            color: var(--blue);
+        }
+
+        .no-results {
+            padding: 24px 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        footer {
+            width: min(var(--content-width), 100%);
+            margin: 18px auto 0;
+            padding: 20px 24px 36px;
+            border-top: 1px solid var(--border);
+            color: #a0aec0;
+            font-size: 13px;
+            text-align: center;
+        }
+
         @media (max-width: 680px) {
+            .nav-inner {
+                min-height: 50px;
+                padding: 0 16px;
+                gap: 8px;
+            }
+
+            .nav-name-full {
+                display: none;
+            }
+
+            .nav-name-short {
+                display: inline;
+            }
+
+            .nav-name {
+                font-size: 15px;
+            }
+
+            .nav-links a {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+
+            .container {
+                padding: 30px 16px 20px;
+            }
+
+            .page-title {
+                font-size: 30px;
+            }
+
+            .page-subtitle {
+                margin-bottom: 18px;
+            }
+
+            .filters {
+                flex-wrap: nowrap;
+                margin-right: -16px;
+                overflow-x: auto;
+                padding: 2px 16px 4px 0;
+                scrollbar-width: none;
+            }
+
+            .filters::-webkit-scrollbar {
+                display: none;
+            }
+
+            .filter-button {
+                flex-shrink: 0;
+                min-height: 36px;
+            }
+
+            .year-group {
+                margin-top: 26px;
+            }
+
+            .year-header {
+                font-size: 20px;
+            }
+
             .paper {
-                padding: 12px 14px;
+                padding: 13px 14px;
             }
 
             .paper-title-line {
                 flex-direction: column;
-                gap: 4px;
+                align-items: flex-start;
+                gap: 5px;
             }
 
-            .paper-actions {
-                gap: 6px;
+            .paper-title {
+                font-size: 16px;
+            }
+
+            .paper-venue-line {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .action-button {
+                min-height: 38px;
+                padding: 5px 11px;
+            }
+
+            footer {
+                padding-right: 16px;
+                padding-left: 16px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
 </head>
 
 <body>
-
-    <!-- ===== Navigation Bar ===== -->
-    <nav>
+    <nav aria-label="Primary navigation">
         <div class="nav-inner">
-            <span class="nav-name">Haoran Xu (徐浩然)</span>
+            <span class="nav-name">
+                <span class="nav-name-full">Haoran Xu (徐浩然)</span>
+                <span class="nav-name-short">Haoran Xu</span>
+            </span>
             <div class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="publications.html" class="active">Publications</a>
+                <a href="publications.html" class="active" aria-current="page">Publications</a>
             </div>
         </div>
     </nav>
 
-    <!-- ===== Main Content ===== -->
-    <div class="container">
+    <main class="container">
+        <header class="page-header">
+            <h1 class="page-title">Publications</h1>
+        </header>
 
-        <h1 class="page-title">Publications</h1>
-        <p class="page-subtitle"><span style="font-style: normal; color: #a0aec0;">*</span> denotes co-primary authors.
-        </p>
-
-        <div class="paper">
-            <div class="paper-title-line">
-                <span class="venue-tag conf">SIGCOMM'26</span>
-                <div class="paper-title">
-                    AIDA: Accelerating Root Cause Analysis for Multi-Vendor Device Failures with LLM-Powered Reasoning
-                </div>
-            </div>
-            <div class="paper-authors">
-                <span class="self">Haoran Xu</span>, Xuan Zeng, Xumiao Zhang, Xiaoxi Zhang, Yang Lv, Peng Zhang, Deke
-                Guo, Ennan Zhai
-            </div>
-            <div class="paper-venue-line">
-                ACM Special Interest Group on Data Communication (SIGCOMM), 2026
-                <div class="paper-badges">
-                    <span class="badge badge-ccfa">CCF A</span>
-                </div>
-            </div>
-            <div class="paper-note">🎉 First-ever SIGCOMM main-track paper from Sun Yat-sen University.</div>
-            <!-- <div class="paper-actions">
-            <a href="javascript:void(0)" onclick="toggleBibtex(this)">Cite</a>
-            <a href="#">Paper</a>
-        </div>
-        <div class="bibtex"></div> -->
+        <div class="filters" role="group" aria-label="Publication filters">
+            <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">All</button>
+            <button class="filter-button" type="button" data-filter="conference"
+                aria-pressed="false">Conference</button>
+            <button class="filter-button" type="button" data-filter="journal" aria-pressed="false">Journal</button>
         </div>
 
-        <div class="paper">
-            <div class="paper-title-line">
-                <span class="venue-tag conf">IWQoS'26</span>
-                <div class="paper-title">
-                    SwitchNN: In-Network CNN Inference for Edge-Assisted Smart Roadside Networks
-                </div>
-            </div>
-            <div class="paper-authors">
-                Jianqiang Zhong, Jingpu Duan, Xiaoxi Zhang, Shuo Liu, <span class="self">Haoran Xu</span>, Wenfei Wu, Yu
-                Wu, Deke Guo, Bingyang Liu, Xu Chen
-            </div>
-            <div class="paper-venue-line">
-                IEEE/ACM International Symposium on Quality of Service (IWQoS), 2026
-                <div class="paper-badges">
-                    <span class="badge badge-ccfb">CCF B</span>
-                </div>
-            </div>
-            <!-- <div class="paper-actions">
-            <a href="javascript:void(0)" onclick="toggleBibtex(this)">Cite</a>
-            <a href="#">Paper</a>
+        <div class="publication-list">
+            <section class="year-group" data-year-group="2026">
+                <h2 class="year-header">2026</h2>
+
+                <article class="paper" data-year="2026" data-type="conference">
+                    <div class="paper-title-line">
+                        <span class="venue-tag conf">SIGCOMM'26</span>
+                        <h3 class="paper-title">AIDA: Accelerating Root Cause Analysis for Multi-Vendor Device Failures
+                            with LLM-Powered Reasoning</h3>
+                    </div>
+                    <p class="paper-authors">
+                        <span class="self">Haoran Xu</span>, Xuan Zeng, Xumiao Zhang, Xiaoxi Zhang, Yang Lv, Peng Zhang,
+                        Deke Guo, Ennan Zhai
+                    </p>
+                    <div class="paper-venue-line">
+                        <span>ACM Special Interest Group on Data Communication (SIGCOMM), 2026</span>
+                        <span class="paper-badges"><span class="badge badge-ccfa">CCF A</span></span>
+                    </div>
+                    <div class="paper-actions">
+                        <button class="action-button bibtex-toggle" type="button" data-target="bibtex-sigcomm-26-aida"
+                            aria-expanded="false">BibTeX</button>
+                        <a class="action-button" href="https://dl.acm.org/doi/10.1145/3789240.3829126" target="_blank"
+                            rel="noopener">Paper</a>
+                        <a class="action-button" href="assets/slides/aida_sigcomm26.pdf" target="_blank"
+                            rel="noopener">Slides</a>
+                    </div>
+                    <div class="bibtex" id="bibtex-sigcomm-26-aida" hidden>
+                        <code class="bibtex-code">@inproceedings{xu2026aida,
+    author = {Xu, Haoran and Zeng, Xuan and Zhang, Xumiao and Zhang, Xiaoxi and Lv, Yang and Zhang, Peng and Guo, Deke and Zhai, Ennan},
+    title = {AIDA: Accelerating Root Cause Analysis for Multi-Vendor Device Failures with LLM-Powered Reasoning},
+    year = {2026},
+    booktitle = {Proceedings of the ACM SIGCOMM 2026 Conference},
+    pages = {770–786},
+}</code>
+                        <button class="copy-button" type="button"
+                            data-copy-target="bibtex-sigcomm-26-aida">Copy</button>
+                    </div>
+
+                </article>
+
+                <article class="paper" data-year="2026" data-type="conference">
+                    <div class="paper-title-line">
+                        <span class="venue-tag conf">IWQoS'26</span>
+                        <h3 class="paper-title">SwitchNN: In-Network CNN Inference for Edge-Assisted Smart Roadside
+                            Networks</h3>
+                    </div>
+                    <p class="paper-authors">
+                        Jianqiang Zhong, Jingpu Duan, Xiaoxi Zhang, Shuo Liu, <span class="self">Haoran Xu</span>,
+                        Wenfei Wu, Yu Wu, Deke Guo, Bingyang Liu, Xu Chen
+                    </p>
+                    <div class="paper-venue-line">
+                        <span>IEEE/ACM International Symposium on Quality of Service (IWQoS), 2026</span>
+                        <span class="paper-badges"><span class="badge badge-ccfb">CCF B</span></span>
+                    </div>
+                </article>
+
+                <article class="paper" data-year="2026" data-type="journal">
+                    <div class="paper-title-line">
+                        <span class="venue-tag journal">IEEE TMC</span>
+                        <h3 class="paper-title">
+                            <a href="https://ieeexplore.ieee.org/document/11328905/" target="_blank"
+                                rel="noopener">Joint Bitrate and Resource Adaptation for Super-Resolution Video
+                                Streaming in Multi-Cluster Edge Networks: A New Online Learning Approach</a>
+                        </h3>
+                    </div>
+                    <p class="paper-authors">
+                        Xiaoxi Zhang, <span class="self">Haoran Xu</span>, Longhao Zou, Jingpu Duan, Chuan Wu, Yali Xue,
+                        Zuozhou Chen, Chaoqi Zhou, Xu Chen
+                    </p>
+                    <div class="paper-venue-line">
+                        <span>IEEE Transactions on Mobile Computing (TMC), 2026</span>
+                        <span class="paper-badges">
+                            <span class="badge badge-ccfa">CCF A</span>
+                            <span class="badge badge-cas1">中科院一区</span>
+                        </span>
+                    </div>
+                    <div class="paper-actions">
+                        <button class="action-button bibtex-toggle" type="button" data-target="bibtex-tmc"
+                            aria-expanded="false">BibTeX</button>
+                        <a class="action-button" href="https://ieeexplore.ieee.org/document/11328905/" target="_blank"
+                            rel="noopener">Paper</a>
+                    </div>
+                    <div class="bibtex" id="bibtex-tmc" hidden>
+                        <code class="bibtex-code">@article{zhang2026joint,
+  title={Joint Bitrate and Resource Adaptation for Super-Resolution Video Streaming in Multi-Cluster Edge Networks: A New Online Learning Approach},
+  author={Zhang, Xiaoxi and Xu, Haoran and Zou, Longhao and Duan, Jingpu and Wu, Chuan and Xue, Yali and Chen, Zuozhou and Zhou, Chaoqi and Chen, Xu},
+  journal={IEEE Transactions on Mobile Computing},
+  year={2026},
+  publisher={IEEE}
+}</code>
+                        <button class="copy-button" type="button" data-copy-target="bibtex-tmc">Copy</button>
+                    </div>
+                </article>
+            </section>
+
+            <section class="year-group" data-year-group="2025">
+                <h2 class="year-header">2025</h2>
+
+                <article class="paper" data-year="2025" data-type="conference">
+                    <div class="paper-title-line">
+                        <span class="venue-tag conf">NSDI'25</span>
+                        <h3 class="paper-title">
+                            <a href="https://www.usenix.org/system/files/nsdi25-zeng.pdf" target="_blank"
+                                rel="noopener">Learning Production-Optimized Congestion Control Selection for Alibaba
+                                Cloud CDN</a>
+                        </h3>
+                    </div>
+                    <p class="paper-authors">
+                        <span class="equal">Xuan Zeng</span>, <span class="self equal">Haoran Xu</span>, <span
+                            class="equal">Chen Chen</span>, Xumiao Zhang, Xiaoxi Zhang, Xu Chen, Guihai Chen, Yubing
+                        Qiu, Yiping Zhang, Chong Hao, Ennan Zhai
+                    </p>
+                    <div class="paper-venue-line">
+                        <span>USENIX Symposium on Networked Systems Design and Implementation (NSDI), 2025</span>
+                        <span class="paper-badges"><span class="badge badge-ccfa">CCF A</span></span>
+                    </div>
+                    <div class="paper-actions">
+                        <button class="action-button bibtex-toggle" type="button" data-target="bibtex-nsdi-25-aliccs"
+                            aria-expanded="false">BibTeX</button>
+                        <a class="action-button" href="https://www.usenix.org/system/files/nsdi25-zeng.pdf"
+                            target="_blank" rel="noopener">Paper</a>
+                        <a class="action-button" href="https://www.usenix.org/system/files/nsdi25_slides-zeng.pdf"
+                            target="_blank" rel="noopener">Slides</a>
+                    </div>
+                    <div class="bibtex" id="bibtex-nsdi-25-aliccs" hidden>
+                        <code class="bibtex-code">@inproceedings{zeng2025learning,
+  title={Learning {Production-Optimized} Congestion Control Selection for Alibaba Cloud {CDN}},
+  author={Zeng, Xuan and Xu, Haoran and Chen, Chen and Zhang, Xumiao and Zhang, Xiaoxi and Chen, Xu and Chen, Guihai and Qiu, Yubing and Zhang, Yiping and Hao, Chong and Zhai, Ennan},
+  booktitle={22nd USENIX Symposium on Networked Systems Design and Implementation (NSDI 25)},
+  pages={827--845},
+  year={2025}
+}</code>
+                        <button class="copy-button" type="button" data-copy-target="bibtex-nsdi-25-aliccs">Copy</button>
+                    </div>
+                </article>
+            </section>
+
+            <section class="year-group" data-year-group="2024">
+                <h2 class="year-header">2024</h2>
+
+                <article class="paper" data-year="2024" data-type="conference">
+                    <div class="paper-title-line">
+                        <span class="venue-tag conf">NAS'24</span>
+                        <h3 class="paper-title">
+                            <a href="https://ieeexplore.ieee.org/document/10781355/" target="_blank"
+                                rel="noopener">MPVSched: Multipath Transmissions and Video Frame Scheduling for Content
+                                Delivery Networks</a>
+                        </h3>
+                    </div>
+                    <p class="paper-authors">
+                        <span class="self">Haoran Xu</span>, Xiaoxi Zhang, Jingpu Duan, Chuan Wu, Jinhang Zuo, Xuan
+                        Zeng, Chen Chen, Yubing Qiu, Xu Chen
+                    </p>
+                    <div class="paper-venue-line">
+                        <span>IEEE International Conference on Networking, Architecture, and Storage (NAS), 2024</span>
+                        <span class="paper-badges"><span class="badge badge-ccfc">CCF C</span></span>
+                    </div>
+                    <div class="paper-actions">
+                        <button class="action-button bibtex-toggle" type="button" data-target="bibtex-nas-24-mpvsched"
+                            aria-expanded="false">BibTeX</button>
+                        <a class="action-button" href="https://ieeexplore.ieee.org/document/10781355/" target="_blank"
+                            rel="noopener">Paper</a>
+                    </div>
+                    <div class="bibtex" id="bibtex-nas-24-mpvsched" hidden>
+                        <code class="bibtex-code">@inproceedings{xu2024mpvsched,
+  title={MPVSched: Multipath Transmissions and Video Frame Scheduling for Content Delivery Networks},
+  author={Xu, Haoran and Zhang, Xiaoxi and Duan, Jingpu and Wu, Chuan and Zuo, Jinhang and Zeng, Xuan and Chen, Chen and Qiu, Yubing and Chen, Xu},
+  booktitle={2024 International Conference on Networking, Architecture and Storage (NAS)},
+  pages={1--4},
+  year={2024},
+  organization={IEEE}
+}</code>
+                        <button class="copy-button" type="button"
+                            data-copy-target="bibtex-nas-24-mpvsched">Copy</button>
+                    </div>
+                </article>
+
+                <article class="paper" data-year="2024" data-type="conference">
+                    <div class="paper-title-line">
+                        <span class="venue-tag conf">INFOCOM'24</span>
+                        <h3 class="paper-title">
+                            <a href="https://ieeexplore.ieee.org/document/10621104" target="_blank"
+                                rel="noopener">Rosevin: Employing Resource- and Rate-Adaptive Edge Super-Resolution for
+                                Video Streaming</a>
+                        </h3>
+                    </div>
+                    <p class="paper-authors">
+                        Xiaoxi Zhang, <span class="self">Haoran Xu</span>, Longhao Zou, Jingpu Duan, Chuan Wu, Yali Xue,
+                        Zuozhou Chen, Xu Chen
+                    </p>
+                    <div class="paper-venue-line">
+                        <span>IEEE International Conference on Computer Communications (INFOCOM), 2024</span>
+                        <span class="paper-badges"><span class="badge badge-ccfa">CCF A</span></span>
+                    </div>
+                    <div class="paper-actions">
+                        <button class="action-button bibtex-toggle" type="button" data-target="bibtex-infocom-24-rosevin"
+                            aria-expanded="false">BibTeX</button>
+                        <a class="action-button" href="https://ieeexplore.ieee.org/document/10621104" target="_blank"
+                            rel="noopener">Paper</a>
+                    </div>
+                    <div class="bibtex" id="bibtex-infocom-24-rosevin" hidden>
+                        <code class="bibtex-code">@inproceedings{zhang2024rosevin,
+  title={Rosevin: Employing resource- and rate-adaptive edge super-resolution for video streaming},
+  author={Zhang, Xiaoxi and Xu, Haoran and Zou, Longhao and Duan, Jingpu and Wu, Chuan and Xue, Yali and Chen, Zuozhou and Chen, Xu},
+  booktitle={IEEE INFOCOM 2024-IEEE Conference on Computer Communications},
+  pages={491--500},
+  year={2024},
+  organization={IEEE}
+}</code>
+                        <button class="copy-button" type="button" data-copy-target="bibtex-infocom-24-rosevin">Copy</button>
+                    </div>
+                </article>
+            </section>
+
+            <p class="no-results" id="no-results" hidden>No publications match this filter.</p>
         </div>
-        <div class="bibtex"></div> -->
-        </div>
 
+        <p class="legend"><span aria-hidden="true">*</span> denotes co-primary authors.</p>
+    </main>
 
-        <div class="paper">
-            <div class="paper-title-line">
-                <span class="venue-tag journal">IEEE TMC'26</span>
-                <div class="paper-title">
-                    Joint Bitrate and Resource Adaptation for Super-Resolution Video Streaming in Multi-Cluster Edge
-                    Networks: A New Online Learning Approach
-                </div>
-            </div>
-            <div class="paper-authors">
-                Xiaoxi Zhang,
-                <span class="self">Haoran Xu</span>,
-                Longhao Zou, Jingpu Duan, Chuan Wu, Yali Xue, Zuozhou Chen, Chaoqi Zhou, Xu Chen
-            </div>
-            <div class="paper-venue-line">
-                IEEE Transactions on Mobile Computing (TMC), 2026
-                <div class="paper-badges">
-                    <span class="badge badge-ccfa">CCF A</span>
-                    <span class="badge badge-cas2">中科院一区(Top)</span>
-                </div>
-            </div>
-            <div class="paper-actions">
-                <a href="javascript:void(0)" onclick="toggleBibtex(this)">Cite</a>
-                <a href="https://ieeexplore.ieee.org/document/11328905/">Paper</a>
-            </div>
-            <div class="bibtex">@article{zhang2026joint,
-                title={Joint Bitrate and Resource Adaptation for Super-Resolution Video Streaming in Multi-Cluster Edge
-                Networks: A New Online Learning Approach},
-                author={Zhang, Xiaoxi and Xu, Haoran and Zou, Longhao and Duan, Jingpu and Wu, Chuan and Xue, Yali and
-                Chen, Zuozhou and Zhou, Chaoqi and Chen, Xu},
-                journal={IEEE Transactions on Mobile Computing},
-                year={2026},
-                publisher={IEEE}
-                }</div>
-        </div>
-
-
-        <div class="paper">
-            <div class="paper-title-line">
-                <span class="venue-tag conf">NSDI'25</span>
-                <div class="paper-title">
-                    Learning Production-Optimized Congestion Control Selection for Alibaba Cloud CDN
-                </div>
-            </div>
-            <div class="paper-authors">
-                <span class="equal">Xuan Zeng</span>, <span class="self equal">Haoran Xu</span>, <span
-                    class="equal">Chen Chen</span>, Xumiao Zhang, Xiaoxi Zhang, Xu Chen, Guihai Chen, Yubing Qiu, Yiping
-                Zhang, Chong Hao, Ennan Zhai
-            </div>
-            <div class="paper-venue-line">
-                USENIX Symposium on Networked Systems Design and Implementation (NSDI), 2025
-                <div class="paper-badges">
-                    <span class="badge badge-ccfa">CCF A</span>
-                </div>
-            </div>
-            <div class="paper-actions">
-                <a href="javascript:void(0)" onclick="toggleBibtex(this)">Cite</a>
-                <a href="https://www.usenix.org/system/files/nsdi25-zeng.pdf">Paper</a>
-                <a href="https://www.usenix.org/system/files/nsdi25_slides-zeng.pdf">Slides</a>
-            </div>
-            <div class="bibtex">@inproceedings{zeng2025learning,
-                title={Learning $\{$Production-Optimized$\}$ Congestion Control Selection for Alibaba Cloud
-                $\{$CDN$\}$},
-                author={Zeng, Xuan and Xu, Haoran and Chen, Chen and Zhang, Xumiao and Zhang, Xiaoxi and Chen, Xu and
-                Chen, Guihai and Qiu, Yubing and Zhang, Yiping and Hao, Chong and others},
-                booktitle={22nd USENIX Symposium on Networked Systems Design and Implementation (NSDI 25)},
-                pages={827--845},
-                year={2025}
-                }</div>
-        </div>
-
-
-        <div class="paper">
-            <div class="paper-title-line">
-                <span class="venue-tag conf">NAS'24</span>
-                <div class="paper-title">
-                    MPVSched: Multipath Transmissions and Video Frame Scheduling for Content Delivery Networks
-                </div>
-            </div>
-            <div class="paper-authors">
-                <span class="self">Haoran Xu</span>, Xiaoxi Zhang, Jingpu Duan, Chuan Wu, Jinhang Zuo, Xuan Zeng, Chen
-                Chen, Yubing Qiu, Xu Chen
-            </div>
-            <div class="paper-venue-line">
-                IEEE International Conference on Networking, Architecture, and Storage (NAS), 2024
-                <div class="paper-badges">
-                    <span class="badge badge-ccfc">CCF C</span>
-                </div>
-            </div>
-            <div class="paper-actions">
-                <a href="javascript:void(0)" onclick="toggleBibtex(this)">Cite</a>
-                <a href="https://ieeexplore.ieee.org/document/10781355/">Paper</a>
-            </div>
-            <div class="bibtex">@inproceedings{xu2024mpvsched,
-                title={MPVSched: Multipath Transmissions and Video Frame Scheduling for Content Delivery Networks},
-                author={Xu, Haoran and Zhang, Xiaoxi and Duan, Jingpu and Wu, Chuan and Zuo, Jinhang and Zeng, Xuan and
-                Chen, Chen and Qiu, Yubing and Chen, Xu},
-                booktitle={2024 International Conference on Networking, Architecture and Storage (NAS)},
-                pages={1--4},
-                year={2024},
-                organization={IEEE}
-                }</div>
-        </div>
-
-
-        <div class="paper">
-            <div class="paper-title-line">
-                <span class="venue-tag conf">INFOCOM'24</span>
-                <div class="paper-title">
-                    Rosevin: Employing Resource- and Rate-Adaptive Edge Super-Resolution for Video Streaming
-                </div>
-            </div>
-            <div class="paper-authors">
-                Xiaoxi Zhang, <span class="self">Haoran Xu</span>, Longhao Zou, Jingpu Duan, Chuan Wu, Yali Xue, Zuozhou
-                Chen, Xu Chen
-            </div>
-            <div class="paper-venue-line">
-                IEEE International Conference on Computer Communications (INFOCOM), 2024
-                <div class="paper-badges">
-                    <span class="badge badge-ccfa">CCF A</span>
-                </div>
-            </div>
-            <div class="paper-actions">
-                <a href="javascript:void(0)" onclick="toggleBibtex(this)">Cite</a>
-                <a href="https://ieeexplore.ieee.org/document/10621104">Paper</a>
-            </div>
-            <div class="bibtex">@inproceedings{zhang2024rosevin,
-                title={Rosevin: Employing resource-and rate-adaptive edge super-resolution for video streaming},
-                author={Zhang, Xiaoxi and Xu, Haoran and Zou, Longhao and Duan, Jingpu and Wu, Chuan and Xue, Yali and
-                Chen, Zuozhou and Chen, Xu},
-                booktitle={IEEE INFOCOM 2024-IEEE Conference on Computer Communications},
-                pages={491--500},
-                year={2024},
-                organization={IEEE}
-                }</div>
-        </div>
-
-        <!--
-    ===== Template for adding more papers =====
-    <div class="paper">
-        <div class="paper-title-line">
-            <span class="venue-tag journal">VENUE'XX</span>
-            <div class="paper-title">
-                <a href="pub/filename.pdf">Paper Title Here</a>
-            </div>
-        </div>
-        <div class="paper-authors">
-            <span class="self">Haoran Xu</span>,
-            Coauthor A,
-            Coauthor B
-        </div>
-        <div class="paper-venue-line">
-            Full Venue Name, Year
-            <div class="paper-badges">
-                <span class="badge badge-ccfa">CCF A</span>
-                <span class="badge badge-cas1">中科院一区(Top)</span>
-            </div>
-        </div>
-        <div class="paper-actions">
-            <a href="javascript:void(0)" onclick="toggleBibtex(this)">Cite</a>
-            <a href="pub/filename.pdf">Paper</a>
-            <a href="#">Slides</a>
-        </div>
-        <div class="bibtex">@inproceedings{key2026,
-  title     = {Paper Title Here},
-  author    = {Xu, Haoran and Author, A and Author, B},
-  booktitle = {Full Venue Name},
-  year      = {2026}
-}</div>
-    </div>
-
-    Badge class reference:
-      badge-ccfa   → CCF A (red)
-      badge-ccfb   → CCF B (yellow)
-      badge-ccfc   → CCF C (gray)
-      badge-cas1   → 中科院一区(Top) (purple)
-      badge-cas2   → 中科院二区(Top) (blue)
-      badge-cast1  → 中国科协T1类 (purple)
-
-    Venue tag class reference:
-      journal   → blue (for journals)
-      conf      → purple (for conferences)
-
-    Co-primary authors:
-      Add class="equal" to author span to show * after name.
-      Combine with self: class="self equal"
-    -->
-
-    </div>
-
-    <!-- ===== Footer ===== -->
     <footer>
-        &copy; 2026 Haoran Xu &middot; Last updated: June 2026
+        &copy; 2026 Haoran Xu &middot; Last updated: July 2026
     </footer>
 
     <script>
-        function toggleBibtex(btn) {
-            var block = btn.closest('.paper').querySelector('.bibtex');
-            if (block.style.display === 'block') {
-                block.style.display = 'none';
-                btn.textContent = 'Cite';
-            } else {
-                if (!block.dataset.cleaned) {
-                    block.textContent = block.textContent.split('\n')
-                        .map(function (line) { return line.trimStart(); })
-                        .join('\n').trim();
-                    block.dataset.cleaned = '1';
-                }
-                block.style.display = 'block';
-                btn.textContent = 'Hide';
-            }
-        }
-    </script>
+        (function () {
+            var papers = Array.prototype.slice.call(document.querySelectorAll('.paper'));
+            var groups = Array.prototype.slice.call(document.querySelectorAll('.year-group'));
+            var filters = Array.prototype.slice.call(document.querySelectorAll('.filter-button'));
+            var noResults = document.getElementById('no-results');
 
+            function applyFilter(filter) {
+                var visibleCount = 0;
+
+                papers.forEach(function (paper) {
+                    var matches = filter === 'all' || paper.dataset.year === filter || paper.dataset.type === filter;
+                    paper.hidden = !matches;
+                    if (matches) {
+                        visibleCount += 1;
+                    }
+                });
+
+                groups.forEach(function (group) {
+                    var hasVisiblePaper = group.querySelector('.paper:not([hidden])');
+                    group.hidden = !hasVisiblePaper;
+                });
+
+                noResults.hidden = visibleCount !== 0;
+            }
+
+            filters.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    filters.forEach(function (item) {
+                        var isActive = item === button;
+                        item.classList.toggle('active', isActive);
+                        item.setAttribute('aria-pressed', String(isActive));
+                    });
+                    applyFilter(button.dataset.filter);
+                });
+            });
+
+            document.querySelectorAll('.bibtex-toggle').forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var block = document.getElementById(button.dataset.target);
+                    var isHidden = block.hidden;
+                    block.hidden = !isHidden;
+                    button.setAttribute('aria-expanded', String(isHidden));
+                    button.textContent = isHidden ? 'Hide BibTeX' : 'BibTeX';
+                });
+            });
+
+            document.querySelectorAll('.bibtex-code').forEach(function (codeElement) {
+                var lines = codeElement.textContent.replace(/\r\n?/g, '\n').split('\n');
+                codeElement.textContent = lines.map(function (line, index) {
+                    var content = line.trim();
+                    if (!content) {
+                        return '';
+                    }
+                    return index === 0 || content.charAt(0) === '}' ? content : '  ' + content;
+                }).join('\n').trim();
+            });
+
+            document.querySelectorAll('.copy-button').forEach(function (button) {
+                button.addEventListener('click', function () {
+                    if (window.getSelection) {
+                        window.getSelection().removeAllRanges();
+                    }
+
+                    var code = document.querySelector('#' + button.dataset.copyTarget + ' .bibtex-code').textContent;
+                    var originalText = button.textContent;
+
+                    function showCopied() {
+                        if (window.getSelection) {
+                            window.getSelection().removeAllRanges();
+                        }
+                        button.textContent = 'Copied';
+                        window.setTimeout(function () {
+                            button.textContent = originalText;
+                        }, 1400);
+                    }
+
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(code).then(showCopied).catch(function () {
+                            button.textContent = 'Copy failed';
+                        });
+                    } else {
+                        var textarea = document.createElement('textarea');
+                        textarea.value = code;
+                        textarea.setAttribute('readonly', '');
+                        textarea.style.position = 'fixed';
+                        textarea.style.opacity = '0';
+                        document.body.appendChild(textarea);
+                        textarea.select();
+                        document.execCommand('copy');
+                        textarea.remove();
+                        showCopied();
+                    }
+                });
+            });
+        }());
+    </script>
 </body>
 
 </html>

@@ -1,27 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Homepage</title>
+    <title>Haoran Xu - Home</title>
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
     <style>
-        /* ===== Reset & Base ===== */
+        :root {
+            --content-width: 1180px;
+            --navy: #1a365d;
+            --blue: #2b6cb0;
+            --text: #2d3748;
+            --muted: #757575;
+            --border: #e2e8f0;
+            --soft: #f8fafc;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            color: #2d3748;
-            background-color: #ffffff;
-            line-height: 1.7;
+            color: var(--text);
+            background: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
             font-size: 16px;
+            line-height: 1.65;
         }
 
         a {
-            color: #2b6cb0;
+            color: var(--blue);
             text-decoration: none;
         }
 
@@ -29,393 +44,531 @@
             text-decoration: underline;
         }
 
-        /* ===== Navigation ===== */
+        :focus-visible {
+            outline: 3px solid rgba(43, 108, 176, 0.35);
+            outline-offset: 2px;
+        }
+
+        /* Navigation: shared with publications.html */
         nav {
-            background-color: #1a365d;
-            padding: 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.96);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+            box-shadow: 0 4px 14px rgba(26, 54, 93, 0.1);
+            backdrop-filter: blur(10px);
         }
 
-        nav .nav-inner {
-            max-width: 960px;
+        .nav-inner {
+            width: min(var(--content-width), 100%);
+            min-height: 52px;
             margin: 0 auto;
+            padding: 0 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 24px;
+            gap: 18px;
         }
 
-        nav .nav-name {
-            color: #ffffff;
-            font-size: 18px;
-            font-weight: bold;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            letter-spacing: 0.5px;
+        .nav-name {
+            color: #1a202c;
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            white-space: nowrap;
         }
 
-        nav .nav-links {
+        .nav-name-short {
+            display: none;
+        }
+
+        .nav-links {
             display: flex;
-            gap: 0;
+            align-items: stretch;
+            flex-shrink: 0;
         }
 
-        nav .nav-links a {
-            color: #cbd5e0;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            font-size: 15px;
-            padding: 14px 20px;
+        .nav-links a {
             display: block;
+            padding: 13px 18px;
+            color: #4a5568;
+            font-size: 14px;
+            white-space: nowrap;
             transition: color 0.2s, background-color 0.2s;
         }
 
-        nav .nav-links a:hover,
-        nav .nav-links a.active {
-            color: #ffffff;
-            background-color: rgba(255,255,255,0.1);
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--blue);
+            background: #edf4ff;
             text-decoration: none;
         }
 
-        /* ===== Main Content ===== */
+        /* Page layout */
         .container {
-            max-width: 960px;
+            width: min(var(--content-width), 100%);
             margin: 0 auto;
-            padding: 40px 24px;
+            padding: 42px 24px 24px;
         }
 
-        /* ===== Profile Section (Left-Right) ===== */
         .profile-section {
-            display: flex;
-            gap: 48px;
-            align-items: flex-start;
-            padding-bottom: 36px;
-            border-bottom: 1px solid #e2e8f0;
+            display: grid;
+            grid-template-columns: 220px minmax(0, 1fr);
+            gap: 54px;
+            align-items: start;
+            padding-bottom: 34px;
+            border-bottom: 1px solid var(--border);
         }
 
-        /* Left column: photo + basic info */
         .profile-left {
-            flex: 0 0 220px;
             text-align: center;
         }
 
-        .profile-left .avatar {
-            width: 180px;
-            height: 180px;
+        .avatar {
+            display: block;
+            width: 204px;
+            height: 204px;
+            margin: 0 auto 18px;
+            border: 4px solid #dbeafe;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid #e2e8f0;
-            margin-bottom: 16px;
-            background-color: #edf2f7;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: auto;
-            margin-right: auto;
-            font-size: 48px;
-            color: #a0aec0;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: #edf2f7;
         }
 
-        .profile-left .name {
-            font-size: 22px;
-            font-weight: bold;
+        .profile-name {
             color: #1a202c;
-            margin-bottom: 4px;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.25;
         }
 
-        .profile-left .name-cn {
+        .name-cn {
+            margin-top: 3px;
+            color: var(--muted);
             font-size: 16px;
-            color: #718096;
-            margin-bottom: 8px;
         }
 
-        .profile-left .affiliation {
-            font-size: 14px;
+        .affiliation {
+            margin-top: 10px;
             color: #4a5568;
+            font-size: 14px;
             line-height: 1.5;
         }
 
-        .profile-left .contact-links {
-            margin-top: 16px;
+        .affiliation a {
+            display: inline-block;
+            margin-top: 2px;
+        }
+
+        .contact-links {
             display: flex;
-            flex-direction: column;
-            gap: 4px;
-            font-size: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 18px;
         }
 
-        .profile-left .contact-links a {
-            color: #2b6cb0;
+        .contact-links a {
+            display: inline-flex;
+            min-height: 30px;
+            align-items: center;
+            padding: 3px 9px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            color: #4a5568;
+            font-size: 12px;
+            line-height: 1.3;
+            transition: color 0.2s, background-color 0.2s, border-color 0.2s;
         }
 
-        /* Right column: bio, interest, education */
+        .contact-links a:hover {
+            border-color: var(--blue);
+            color: #ffffff;
+            background: var(--blue);
+            text-decoration: none;
+        }
+
         .profile-right {
-            flex: 1;
+            min-width: 0;
+        }
+
+        .page-heading {
+            margin-bottom: 14px;
+            color: #2d3748;
+            font-size: 36px;
+            font-weight: 400;
+            letter-spacing: -0.6px;
+            line-height: 1.15;
+        }
+
+        .bio p {
+            margin-bottom: 14px;
+            color: #333333;
+            font-size: 15px;
+        }
+
+        .bio p:last-child {
+            margin-bottom: 0;
+        }
+
+        .bio strong {
+            color: #1a202c;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+            gap: 34px;
+            margin-top: 30px;
         }
 
         .section-title {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            font-size: 20px;
-            font-weight: bold;
-            color: #1a365d;
-            margin-bottom: 12px;
-            padding-bottom: 6px;
-            border-bottom: 2px solid #2b6cb0;
             display: inline-block;
-        }
-
-        .profile-right .block {
-            margin-bottom: 28px;
-        }
-
-        .profile-right p {
-            color: #4a5568;
-            font-size: 15px;
-            text-align: justify;
+            margin-bottom: 14px;
+            padding-bottom: 4px;
+            border-bottom: 2px solid var(--blue);
+            color: var(--navy);
+            font-size: 21px;
+            font-weight: 700;
+            line-height: 1.25;
         }
 
         .interest-list {
-            list-style: none;
-            padding: 0;
+            padding-left: 18px;
+            color: #333333;
+            font-size: 14px;
         }
 
         .interest-list li {
-            padding: 4px 0;
-            font-size: 15px;
-            color: #4a5568;
-            position: relative;
-            padding-left: 18px;
+            margin-bottom: 6px;
+            padding-left: 2px;
         }
 
-        .interest-list li::before {
-            content: "\25B8";
-            position: absolute;
-            left: 0;
-            color: #2b6cb0;
-        }
-
-        /* Education entries */
-        .edu-entry {
-            margin-bottom: 14px;
+        .education-list {
             display: flex;
-            gap: 16px;
-            align-items: baseline;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        .edu-entry .edu-time {
-            flex: 0 0 140px;
+        .edu-entry {
+            display: block;
+            padding-bottom: 1px;
+        }
+
+        .edu-stage {
+            color: #333333;
             font-size: 14px;
-            color: #718096;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 600;
+            line-height: 1.45;
         }
 
-        .edu-entry .edu-detail {
-            flex: 1;
+        .edu-detail {
+            margin-top: 2px;
+            color: #757575;
+            font-size: 13px;
+            line-height: 1.5;
         }
 
-        .edu-entry .edu-school {
-            font-size: 15px;
-            font-weight: bold;
+        .exp-time,
+        .exp-role,
+        .exp-org,
+        .exp-desc {
+            color: #333333;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .exp-role {
             color: #2d3748;
-        }
-
-        .edu-entry .edu-degree {
+            font-weight: 700;
+            line-height: 1.45;
             font-size: 14px;
-            color: #718096;
         }
 
-        /* ===== Experience Section (Full Width) ===== */
+        .edu-note {
+            margin-top: 2px;
+            color: #a0aec0;
+            font-size: 12px;
+        }
+
         .experience-section {
-            margin-top: 36px;
+            margin-top: 0;
+            padding-top: 28px;
         }
 
         .exp-entry {
-            margin-bottom: 20px;
-            display: flex;
+            display: grid;
+            grid-template-columns: 140px minmax(0, 1fr);
             gap: 16px;
-            align-items: baseline;
+            align-items: start;
+            padding: 0;
         }
 
-        .exp-entry .exp-time {
-            flex: 0 0 140px;
+        .exp-org {
+            margin-top: 1px;
+        }
+
+        .exp-desc {
+            margin-top: 5px;
+        }
+
+        .exp-desc strong {
+            color: #333333;
+        }
+
+        .awards-section {
+            margin-top: 28px;
+        }
+
+        .award-list {
+            border-top: 1px solid var(--border);
+        }
+
+        .award-entry {
+            position: relative;
+            padding: 13px 0 13px 18px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .award-entry::before {
+            position: absolute;
+            top: 21px;
+            left: 2px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--blue);
+            content: "";
+        }
+
+        .award-title {
+            display: inline;
+            color: #333333;
             font-size: 14px;
-            color: #718096;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 700;
+            line-height: 1.45;
         }
 
-        .exp-entry .exp-detail {
-            flex: 1;
-        }
-
-        .exp-entry .exp-role {
-            font-size: 15px;
-            font-weight: bold;
-            color: #2d3748;
-        }
-
-        .exp-entry .exp-org {
+        .award-org {
+            display: inline;
+            color: #757575;
             font-size: 14px;
-            color: #4a5568;
+            line-height: 1.5;
         }
 
-        .exp-entry .exp-desc {
-            font-size: 14px;
-            color: #718096;
-            margin-top: 4px;
-        }
-
-        /* ===== Footer ===== */
-        footer {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 24px 24px 40px;
-            text-align: center;
+        .award-cn {
+            display: block;
+            margin-top: 2px;
+            color: #757575;
             font-size: 13px;
-            color: #a0aec0;
-            border-top: 1px solid #e2e8f0;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.5;
+            font-style: italic;
         }
 
-        /* ===== Responsive ===== */
-        @media (max-width: 680px) {
+        footer {
+            width: min(var(--content-width), 100%);
+            margin: 18px auto 0;
+            padding: 20px 24px 36px;
+            border-top: 1px solid var(--border);
+            color: #a0aec0;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        @media (max-width: 760px) {
             .profile-section {
-                flex-direction: column;
-                align-items: center;
-                gap: 24px;
+                grid-template-columns: 1fr;
+                gap: 30px;
             }
 
             .profile-left {
-                flex: none;
+                max-width: 360px;
+                margin: 0 auto;
             }
 
-            .edu-entry,
+            .details-grid {
+                grid-template-columns: 1fr;
+                gap: 26px;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .nav-inner {
+                min-height: 50px;
+                padding: 0 16px;
+                gap: 8px;
+            }
+
+            .nav-name-full {
+                display: none;
+            }
+
+            .nav-name-short {
+                display: inline;
+            }
+
+            .nav-name {
+                font-size: 15px;
+            }
+
+            .nav-links a {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+
+            .container {
+                padding: 30px 16px 20px;
+            }
+
+            .avatar {
+                width: 190px;
+                height: 190px;
+            }
+
+            .page-heading {
+                font-size: 32px;
+            }
+
             .exp-entry {
-                flex-direction: column;
-                gap: 2px;
+                padding: 13px 14px;
             }
 
-            .edu-entry .edu-time,
-            .exp-entry .exp-time {
-                flex: none;
+            footer {
+                padding-right: 16px;
+                padding-left: 16px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
 </head>
+
 <body>
-
-<!-- ===== Navigation Bar ===== -->
-<nav>
-    <div class="nav-inner">
-        <span class="nav-name">Haoran Xu (徐浩然)</span>
-        <div class="nav-links">
-            <a href="index.html" class="active">Home</a>
-            <a href="publications.html">Publications</a>
-        </div>
-    </div>
-</nav>
-
-<!-- ===== Main Content ===== -->
-<div class="container">
-
-    <!-- Profile: Left-Right Layout -->
-    <div class="profile-section">
-
-        <!-- Left: Photo, Name, Affiliation -->
-        <div class="profile-left">
-            <img class="avatar" src="index_files/haoran.jpg" alt="Haoran Xu"> 
-
-            <div class="name">Haoran Xu</div>
-            <div class="name-cn">徐浩然</div>
-            <div class="affiliation">
-                Ph.D. Student<br>
-                Sun Yat-sen University
-            </div>
-            <div class="contact-links">
-                <a href="mailto:yourname@example.edu">xuhr6 [AT] mail2.sysu.edu</a>
-                <a href="https://scholar.google.com/citations?user=OB9Gi8oAAAAJ&hl=zh-CN&oi=ao" target="_blank">Google Scholar</a>
-                <!-- <a href="https://github.com/" target="_blank">GitHub</a> -->
+    <nav aria-label="Primary navigation">
+        <div class="nav-inner">
+            <span class="nav-name">
+                <span class="nav-name-full">Haoran Xu (徐浩然)</span>
+                <span class="nav-name-short">Haoran Xu</span>
+            </span>
+            <div class="nav-links">
+                <a href="index.html" class="active" aria-current="page">Home</a>
+                <a href="publications.html">Publications</a>
             </div>
         </div>
+    </nav>
 
-        <!-- Right: Biography, Research Interests, Education -->
-        <div class="profile-right">
+    <main class="container">
+        <section class="profile-section" aria-labelledby="biography-heading">
+            <aside class="profile-left">
+                <img class="avatar" src="assets/images/haoran.jpg" alt="Haoran Xu">
+                <div class="profile-name">Haoran Xu</div>
+                <div class="name-cn">徐浩然</div>
+                <div class="affiliation">
+                    Ph.D. Student<br>
+                    <a href="https://www.sysu.edu.cn/" target="_blank" rel="noopener">Sun Yat-sen University</a>
+                </div>
+                <div class="contact-links" id="contact" aria-label="Contact links">
+                    <a href="mailto:xuhr6@mail2.sysu.edu">Email</a>
+                    <a href="https://scholar.google.com/citations?user=OB9Gi8oAAAAJ&amp;hl=zh-CN&amp;oi=ao"
+                        target="_blank" rel="noopener">Google Scholar</a>
+                </div>
+            </aside>
 
-            <!-- Biography -->
-            <div class="block">
-                <div class="section-title">Biography</div>
-                <p>
-                    I am a first-year Ph.D. student in the School of Computer Science at Sun Yat-sen University, working under the guidance of Prof. Deke Guo. My research broadly focuses on AI for Networking, with particular emphasis on integrating AI into network infrastructure and management. 
-                </p>
-                <p>
-                    Prior to my Ph.D. program, I received my B.S. degree from Sun Yat-sen University and began my graduate research under the mentorship of Assoc. Prof.  Xiaoxi Zhang. I have also worked as a Research Intern at Alibaba Cloud with Dr. Ennan Zhai and Dr. Xuan Zeng, exploring AI-driven network operations.
-                </p>
-            </div>
+            <div class="profile-right">
+                <h1 class="page-heading" id="biography-heading">Biography</h1>
+                <div class="bio">
+                    <p>
+                        I am a second-year Ph.D. student in the School of Computer Science at Sun Yat-sen University,
+                        working under the guidance of Prof. Deke Guo. Prior to my Ph.D. studies, I received my B.S.
+                        degree from Sun Yat-sen University and began my research journey under the mentorship of Assoc.
+                        Prof. Xiaoxi Zhang. I have also worked as a Research Intern at Alibaba Cloud with Dr. Ennan Zhai
+                        and Dr. Xuan Zeng, exploring AI-driven network operations. My research interests broadly lie in
+                        AI for networking and intelligent video systems, with the long-term goal of developing
+                        deployable AI techniques to improve the reliability and efficiency of real-world networked
+                        systems.
 
-            <!-- Research Interests -->
-            <!-- <div class="block">
-                <div class="section-title">Research Interests</div>
-                <ul class="interest-list">
-                    <li>AI for Networking</li>
-                    <li>Large Language Models</li>
-                    <li>Machine Learning</li>
-                    <li>Information Retrieval</li>
-                </ul>
-            </div> -->
-
-            <!-- Education -->
-            <div class="block">
-                <div class="section-title">Education</div>
-
-                <div class="edu-entry">
-                    <span class="edu-time">2025.9 - Present</span>
-                    <div class="edu-detail">
-                        <div class="edu-school">Sun Yat-sen University</div>
-                        <div class="edu-degree">Ph.D. in Computer Science, advised by Prof. Deke Guo</div>
-                    </div>
+                    </p>
+                    <!-- <p>
+                        My long-term goal is to develop deployable AI techniques that improve the reliability and
+                        efficiency of real-world networked systems.
+                    </p> -->
                 </div>
 
-                <div class="edu-entry">
-                    <span class="edu-time">2023.9 - 2025.8</span>
-                    <div class="edu-detail">
-                        <div class="edu-school">Sun Yat-sen University</div>
-                        <div class="edu-degree">M.S. in Computer Science, advised by Assoc. Prof. Xiaoxi Zhang</div>
-                        <div class="edu-degree" style="font-size: 12px; color: #a0aec0; margin-top: 2px;">Integrated Master's-Ph.D. Program (硕博连读)</div>
-                    </div>
-                </div>
+                <div class="details-grid">
+                    <section aria-labelledby="interests-heading">
+                        <h2 class="section-title" id="interests-heading">Interests</h2>
+                        <ul class="interest-list">
+                            <li>AI for Network Management and Operations</li>
+                            <li>Resource-Efficient AI Systems</li>
+                            <li>Intelligent Video Systems</li>
+                        </ul>
+                    </section>
 
-                <div class="edu-entry">
-                    <span class="edu-time">2018.9 - 2023.6</span>
-                    <div class="edu-detail">
-                        <div class="edu-school">Sun Yat-sen University</div>
-                        <div class="edu-degree">B.S. in Information and Computational Science</div>
+                    <section aria-labelledby="education-heading">
+                        <h2 class="section-title" id="education-heading">Education</h2>
+                        <div class="education-list">
+                            <div class="edu-entry">
+                                <div class="edu-stage">Ph.D. in Computer Science, 2025.9 – Present</div>
+                                <div class="edu-detail">Sun Yat-sen University | Advisor: Prof. Deke Guo</div>
+                            </div>
+                            <div class="edu-entry">
+                                <div class="edu-stage">M.S. in Computer Science, 2023.9 – 2025.8</div>
+                                <div class="edu-detail">Sun Yat-sen University | Advisor: Assoc. Prof. Xiaoxi Zhang
+                                </div>
+                            </div>
+                            <div class="edu-entry">
+                                <div class="edu-stage">B.S. in Information and Computational Science, 2018.9 – 2023.6
+                                </div>
+                                <div class="edu-detail">Sun Yat-sen University</div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <section class="experience-section" id="experience" aria-labelledby="experience-heading">
+            <h2 class="section-title" id="experience-heading">Experience</h2>
+            <div class="exp-entry">
+                <span class="exp-time">2024.5 – 2026.6</span>
+                <div>
+                    <div class="exp-role">Research Intern</div>
+                    <div class="exp-org">Network Research Lab, Alibaba Cloud</div>
+                    <div class="exp-desc">Worked on developing an <strong>LLM-driven network operations system that
+                            automates root cause analysis and fault diagnosis for large-scale cloud
+                            infrastructure</strong>, supervised by Dr. Ennan Zhai and Dr. Xuan Zeng.</div>
+                    <div class="exp-desc">This internship work contributed to AIDA, accepted by ACM SIGCOMM 2026.
                     </div>
                 </div>
             </div>
+        </section>
 
-        </div>
-    </div>
-
-    <!-- Experience Section (Full Width) -->
-    <div class="experience-section">
-        <div class="section-title">Experience</div>
-
-        <div class="exp-entry">
-            <span class="exp-time">2024.5 - 2026.6</span>
-            <div class="exp-detail">
-                <div class="exp-role">Research Intern</div>
-                <div class="exp-org">Network Research Lab, Alibaba Cloud</div>
-                <div class="exp-desc">Worked on developing an <b>LLM-driven network operations system that automates root cause analysis and fault diagnosis for large-scale cloud infrastructure</b>, supervised by Dr. Ennan Zhai and Dr. Xuan Zeng.</div>                  
+        <section class="awards-section" id="awards" aria-labelledby="awards-heading">
+            <h2 class="section-title" id="awards-heading">Awards &amp; Honors</h2>
+            <div class="award-list">
+                <div class="award-entry">
+                    <span class="award-title">CCF Computility Outstanding PhD Student Award</span>
+                    <span class="award-org"> · CCF, 2026</span>
+                    <span class="award-cn">CCF中国算力网大会优秀博士生，中国计算机学会</span>
+                </div>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
-</div>
-
-<!-- ===== Footer ===== -->
-<footer>
-    &copy; 2026 Haoran Xu &middot; Last updated: June 2026
-</footer>
-
+    <footer>
+        &copy; 2026 Haoran Xu &middot; Last updated: August 2026
+    </footer>
 </body>
+
 </html>
