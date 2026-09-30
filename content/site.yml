@@ -1,0 +1,31 @@
+name: Haoran Xu
+name_cn: 徐浩然
+role: Ph.D. Student
+affiliation:
+  name: Sun Yat-sen University
+  url: https://www.sysu.edu.cn/
+email: xuhr6@mail2.sysu.edu
+portrait: assets/images/haoran.jpg
+favicon: assets/images/favicon-hx.png
+url: https://vnbxu.github.io
+description: Haoran Xu is a Ph.D. student at Sun Yat-sen University working on AI for networking, resource-efficient AI systems, and intelligent video systems.
+copyright_year: 2026
+updated: auto
+publications_updated: auto
+featured_publications:
+  - aida-2026
+  - aliccs-2025
+interests:
+  - AI for Network Management and Operations
+  - Resource-Efficient AI Systems
+  - Intelligent Video Systems
+links:
+  - label: Email
+    url: mailto:xuhr6@mail2.sysu.edu
+  - label: Google Scholar
+    url: https://scholar.google.com/citations?user=OB9Gi8oAAAAJ&hl=zh-CN&oi=ao
+badges:
+  ccfa: CCF A
+  ccfb: CCF B
+  ccfc: CCF C
+  cas1: 中科院一区

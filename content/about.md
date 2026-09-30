@@ -1,0 +1,3 @@
+I am a second-year Ph.D. student in the School of Computer Science at Sun Yat-sen University, working under the guidance of Prof. Deke Guo. Prior to my Ph.D. studies, I received my B.S. degree from Sun Yat-sen University and began my research journey under the mentorship of Assoc. Prof. Xiaoxi Zhang. I have also worked as a Research Intern at Alibaba Cloud with Dr. Ennan Zhai and Dr. Xuan Zeng, exploring AI-driven network operations. 
+
+My research interests broadly lie in AI for networking and intelligent video systems, with the long-term goal of developing deployable AI techniques to improve the reliability and efficiency of real-world networked systems.

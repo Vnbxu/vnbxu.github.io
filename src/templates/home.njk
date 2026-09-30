@@ -1,0 +1,111 @@
+{% extends 'base.njk' %}
+{% block scripts %}<script src="assets/js/publications.js?v={{ asset_versions.js }}" defer></script>{% endblock %}
+{% block content %}
+  <section class="hero" aria-label="Profile, biography and interests">
+    <aside class="profile-card" aria-labelledby="name">
+      <figure class="portrait">
+        <img src="{{ site.portrait }}" alt="Portrait of {{ site.name }}" width="208" height="232" fetchpriority="high">
+      </figure>
+      <div class="profile-copy">
+        <h1 id="name">{{ site.name }} <span lang="zh-CN">{{ site.name_cn }}</span></h1>
+        <p class="hero-affiliation"><a href="{{ site.affiliation.url }}">{{ site.affiliation.name }}</a></p>
+        <div class="contact-links" aria-label="Contact and academic profiles">
+          {% for link in site.links %}<a href="{{ link.url }}">{{ link.label }} <span aria-hidden="true">↗</span></a>{% endfor %}
+        </div>
+      </div>
+    </aside>
+    <div class="hero-main">
+      <section class="about-section" id="about" aria-labelledby="about-heading">
+        <h2 class="section-label" id="about-heading">Biography</h2>
+        <div class="prose">{{ about | safe }}</div>
+      </section>
+      <section class="interests-section" id="interests" aria-labelledby="interests-heading">
+        <h2 class="section-label" id="interests-heading">Interests</h2>
+        <ul class="interests">
+          {% for interest in site.interests %}<li>{{ interest }}</li>{% endfor %}
+        </ul>
+      </section>
+    </div>
+  </section>
+
+  {% if education.length %}
+  <section class="section-row" id="education" aria-labelledby="education-heading">
+    <h2 class="section-label" id="education-heading">Education</h2>
+    <div class="timeline">
+      {% for entry in education %}
+      <article class="timeline-entry">
+        <div class="entry-header"><h3>{{ entry.degree }}</h3><p class="date-range">{{ entry.start | originalDate }} – {{ entry.end | originalDate }}</p></div>
+        <p class="entry-organization">{{ entry.institution }}</p>
+        {% if entry.advisor %}<p class="entry-note">Advisor: {{ entry.advisor }}</p>{% endif %}
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if featured.length %}
+  <section class="section-row" id="selected-publications" aria-labelledby="selected-heading">
+    <div class="section-heading">
+      <h2 class="section-label" id="selected-heading">Selected publications</h2>
+      <a class="section-link" href="publications.html">All publications <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="featured-papers">{% for paper in featured %}{% include 'components/paper.njk' %}{% endfor %}</div>
+  </section>
+  {% endif %}
+
+  {% if projects.length %}
+  <section class="section-row" id="research" aria-labelledby="research-heading">
+    <div class="section-heading">
+      <h2 class="section-label" id="research-heading">Selected research</h2>
+      <a class="section-link" href="publications.html">All publications <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="research-list">
+      {% for project in projects %}
+      <article class="research-entry" id="project-{{ project.id }}">
+        <div class="research-meta">
+          <span class="eyebrow">{{ project.topic }}</span>
+          {% if project.paper %}<span class="research-venue">{{ project.paper.venue_short }} · {{ project.paper.year }}</span>{% endif %}
+        </div>
+        <h3>{{ project.name }}</h3>
+        <p>{{ project.description }}</p>
+        <div class="resource-links">
+          {% for link in project.links %}<a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.label }} <span aria-hidden="true">↗</span></a>{% endfor %}
+          {% if project.paper %}<a href="publications.html#{{ project.paper.id }}">Publication details <span aria-hidden="true">→</span></a>{% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if experience.length %}
+  <section class="section-row" id="experience" aria-labelledby="experience-heading">
+    <h2 class="section-label" id="experience-heading">Experience</h2>
+    <div class="timeline">
+      {% for entry in experience %}
+      <article class="timeline-entry">
+        <div class="entry-header"><h3>{{ entry.role }}</h3><p class="date-range">{{ entry.start | originalDate }} – {{ entry.end | originalDate }}</p></div>
+        <p class="entry-organization">{{ entry.organization }}</p>
+        <div class="entry-description">{{ entry.description | markdown | safe }}</div>
+        {% if entry.note %}<p class="entry-description">{{ entry.note }}</p>{% endif %}
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+  {% if awards.length %}
+  <section class="section-row" id="awards" aria-labelledby="awards-heading">
+    <h2 class="section-label" id="awards-heading">Awards &amp; Honors</h2>
+    <div>
+      {% for award in awards %}
+      <article class="award-entry">
+        <div class="entry-header"><h3>{{ award.title }}</h3><p class="date-range">{{ award.year }}</p></div>
+        {% if award.organization %}<p class="entry-organization">{{ award.organization }}</p>{% endif %}
+        {% if award.title_cn %}<p class="entry-note" lang="zh-CN">{{ award.title_cn }}</p>{% endif %}
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+  <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+{% endblock %}

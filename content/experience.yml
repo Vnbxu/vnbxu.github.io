@@ -1,0 +1,14 @@
+- role: Research Intern
+  organization: WeChat, Tencent
+  start: '2026-10'
+  end: Present
+  description: >-
+    Working on **AI-driven root cause analysis for large-scale services**, with a focus on reliable and traceable fault diagnosis.
+
+- role: Research Intern
+  organization: Network Research Lab, Alibaba Cloud
+  start: '2024-05'
+  end: '2026-06'
+  description: >-
+    Worked on developing an **LLM-driven network operations system that automates root cause analysis and fault diagnosis for large-scale cloud infrastructure**, supervised by Dr. Ennan Zhai and Dr. Xuan Zeng.
+  note: This internship work contributed to AIDA, accepted by ACM SIGCOMM 2026.

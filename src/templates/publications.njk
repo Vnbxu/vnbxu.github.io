@@ -1,0 +1,36 @@
+{% extends 'base.njk' %}
+{% block scripts %}<script src="assets/js/publications.js?v={{ asset_versions.js }}" defer></script>{% endblock %}
+{% block content %}
+  <header class="page-heading">
+    <h1>Publications</h1>
+    <a class="scholar-link" href="{{ scholar.url }}">Google Scholar <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <div class="publication-tools" hidden>
+    <div class="filter-row">
+      <div class="type-filters" role="group" aria-label="Publication type">
+        <button type="button" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-filter="conference" aria-pressed="false">Conference</button>
+        <button type="button" data-filter="journal" aria-pressed="false">Journal</button>
+      </div>
+      <div class="year-filter"><label for="year-filter">Year</label><select id="year-filter"><option value="all">All years</option>{% for group in groups %}<option value="{{ group.year }}">{{ group.year }}</option>{% endfor %}</select></div>
+    </div>
+    <div class="search-row">
+      <label class="search-field"><span>Search publications</span><input id="publication-search" type="search" placeholder="Title, author, or venue" autocomplete="off"></label>
+      <button class="reset-filters" type="button" hidden>Reset filters</button>
+    </div>
+  </div>
+  <p class="publication-count" id="publication-count" role="status" aria-live="polite" aria-atomic="true">{{ publications.length }} publications</p>
+
+  <div class="publication-list">
+    {% for group in groups %}
+    <section class="year-group" data-year-group="{{ group.year }}" aria-labelledby="year-{{ group.year }}">
+      <h2 class="year-heading" id="year-{{ group.year }}">{{ group.year }}</h2>
+      <div class="year-papers">{% for paper in group.papers %}{% include 'components/paper.njk' %}{% endfor %}</div>
+    </section>
+    {% endfor %}
+    <p class="no-results" hidden>No publications match your search. Try another keyword or reset the filters.</p>
+  </div>
+  <p class="author-legend">* denotes co-primary authors.</p>
+  <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+{% endblock %}

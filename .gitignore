@@ -1,0 +1,10 @@
+node_modules/
+.DS_Store
+coverage/
+/_local/
+npm-debug.log*
+/index.html
+/publications.html
+/robots.txt
+/sitemap.xml
+/.nojekyll

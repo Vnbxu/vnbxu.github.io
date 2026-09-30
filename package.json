@@ -1,0 +1,22 @@
+{
+  "name": "haoran-xu-academic-homepage",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A small, content-driven academic website with static HTML output.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/run.cjs build",
+    "export": "node scripts/run.cjs export",
+    "check": "node scripts/run.cjs check",
+    "dev": "node scripts/run.cjs dev",
+    "test": "node scripts/run.cjs test"
+  },
+  "dependencies": {
+    "markdown-it": "15.0.2",
+    "nunjucks": "3.2.4",
+    "yaml": "2.8.4"
+  }
+}

@@ -1,0 +1,20 @@
+<article class="paper" id="{{ paper.id }}" data-type="{{ paper.type }}" data-year="{{ paper.year }}">
+  <div class="paper-kicker"><span>{{ paper.venue_short }}</span>{% for badge in paper.badges %}<span class="badge badge-{{ badge }}">{{ site.badges[badge] }}</span>{% endfor %}</div>
+  <h3 class="paper-title">{% if paper.url %}<a href="{{ paper.url }}" target="_blank" rel="noopener noreferrer">{{ paper.title }}</a>{% else %}{{ paper.title }}{% endif %}</h3>
+  <p class="paper-authors">{% for author in paper.authors %}{% if author.name == site.name %}<strong>{{ author.name }}</strong>{% else %}{{ author.name }}{% endif %}{% if author.equal %}<sup>*</sup>{% endif %}{% if not loop.last %}, {% endif %}{% endfor %}</p>
+  <p class="paper-venue">{{ paper.venue }}</p>
+  {% if paper.links.length or paper.bibtex %}
+  <div class="paper-resources">
+    <div class="resource-links">{% for link in paper.links %}<a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.label }} <span aria-hidden="true">↗</span></a>{% endfor %}</div>
+    {% if paper.bibtex %}
+    <details class="citation">
+      <summary>BibTeX</summary>
+      <div class="citation-panel">
+        <div class="citation-toolbar"><button type="button" class="copy-citation" hidden>Copy BibTeX</button></div>
+        <pre><code>{{ paper.bibtex }}</code></pre>
+      </div>
+    </details>
+    {% endif %}
+  </div>
+  {% endif %}
+</article>
