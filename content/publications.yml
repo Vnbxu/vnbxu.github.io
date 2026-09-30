@@ -53,8 +53,8 @@
     - ccfb
   links: 
     - label: Paper
-      url: https://dl.acm.org/doi/10.1145/3789240.3829126
-  url: https://dl.acm.org/doi/10.1145/3789240.3829126
+      url: https://doi.org/10.1109/IWQoS70441.2026.11661056
+  url: https://doi.org/10.1109/IWQoS70441.2026.11661056
   bibtex: |-
     @inproceedings{zhong2026switchnn,
       title={SwitchNN: In-Network CNN Inference for Edge-Assisted Smart Roadside Networks},
@@ -86,8 +86,8 @@
     - cas1
   links:
     - label: Paper
-      url: https://ieeexplore.ieee.org/document/11328905/
-  url: https://ieeexplore.ieee.org/document/11328905/
+      url: https://doi.org/10.1109/TMC.2026.3650821
+  url: https://doi.org/10.1109/TMC.2026.3650821
   bibtex: |-
     @article{zhang2026joint,
       title={Joint Bitrate and Resource Adaptation for Super-Resolution Video Streaming in Multi-Cluster Edge Networks: A New Online Learning Approach},
@@ -127,7 +127,7 @@
   url: https://www.usenix.org/system/files/nsdi25-zeng.pdf
   bibtex: |-
     @inproceedings{zeng2025learning,
-      title={Learning {Production-Optimized} Congestion Control Selection for Alibaba Cloud {CDN}},
+      title={Learning Production-Optimized Congestion Control Selection for Alibaba Cloud CDN},
       author={Zeng, Xuan and Xu, Haoran and Chen, Chen and Zhang, Xumiao and Zhang, Xiaoxi and Chen, Xu and Chen, Guihai and Qiu, Yubing and Zhang, Yiping and Hao, Chong and Zhai, Ennan},
       booktitle={22nd USENIX Symposium on Networked Systems Design and Implementation (NSDI 25)},
       pages={827--845},
@@ -153,8 +153,8 @@
     - ccfc
   links:
     - label: Paper
-      url: https://ieeexplore.ieee.org/document/10781355/
-  url: https://ieeexplore.ieee.org/document/10781355/
+      url: https://doi.org/10.1109/NAS63802.2024.10781355
+  url: https://doi.org/10.1109/NAS63802.2024.10781355
   bibtex: |-
     @inproceedings{xu2024mpvsched,
       title={MPVSched: Multipath Transmissions and Video Frame Scheduling for Content Delivery Networks},
@@ -183,8 +183,8 @@
     - ccfa
   links:
     - label: Paper
-      url: https://ieeexplore.ieee.org/document/10621104
-  url: https://ieeexplore.ieee.org/document/10621104
+      url: https://doi.org/10.1109/INFOCOM52122.2024.10621104
+  url: https://doi.org/10.1109/INFOCOM52122.2024.10621104
   bibtex: |-
     @inproceedings{zhang2024rosevin,
       title={Rosevin: Employing resource- and rate-adaptive edge super-resolution for video streaming},
